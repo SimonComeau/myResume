@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Contact</title>
 </head>
-<body>
+<body style="background-color: lightblue;">
     <div class="contact-base" style="width:800px; height: 500px; border: 2px solid black;">
         <div class="contact-content-display">
             <div class="contact-info" style="position: absolute; width: 200px;">
@@ -15,15 +15,27 @@
                     <p style="margin: 2px;">Via email:</p>
                     <a href="mailto:nomismoc@gmail.com">nomismoc@gmail.com</a>
                 </div>
+                <div class="contact-info-social-media">
+                    <a href="https://www.linkedin.com/in/simon-comeau-30a082135" target="_blank">
+                        <img src="logos/linkedin-logo-3.png" style="height: 40px;"></a>
+                    <a href="https://plus.google.com/u/0/113309319995055646955" target="_blank">
+                        <img src="logos/g-plus-logo.png" style="height: 40px;"></a>
+                </div>
             </div>
             <div class="contact-form" style="position:relative; width: 560px; margin-left: 200px; padding: 20px;">
                 <form class="contact-info-form" method="post">
-                    <div>Name:*</div>
-                    <input type="text" name="cf_name" style="padding: 5px; margin: 5px;" placeholder="Name"><br>
-                    <div>Email:*</div>
-                    <input type="text" name="cf_email" style="padding: 5px; margin: 5px;" placeholder="Email"><br>
-                    <div>Message:</div>
-                    <textarea name="cf_message" style="padding: 5px; margin: 5px; width: 400px; height: 100px;" placeholder="Message"></textarea><br>
+                    <div class="contact-form-block" style="margin-bottom: 15px;">
+                        <div>Name:*</div>
+                        <input type="text" name="contact-form-name" style="padding: 5px; margin: 5px;" placeholder="Name"><br>
+                    </div>
+                    <div class="contact-form-block" style="margin-bottom: 15px;">
+                        <div>Email:*</div>
+                        <input type="text" name="contact-form-email" style="padding: 5px; margin: 5px;" placeholder="Email"><br>
+                    </div>
+                    <div class="contact-form-block">
+                        <div>Message:</div>
+                        <textarea name="contact-form-message" style="padding: 5px; margin: 5px; width: 400px; height: 100px;" placeholder="Message"></textarea><br>
+                    </div>
                     <input type="submit" value="Send">
                     <input type="reset" value="Clear">
                 </form>
