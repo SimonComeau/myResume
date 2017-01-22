@@ -1,0 +1,27 @@
+{
+  "name": "myresume",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bower": "^1.8.0",
+    "http-server": "^0.9.0",
+    "karma": "^1.4.0",
+    "protractor": "^5.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server ./app -a localhost -p 8000 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimonComeau/myResume.git"
+  },
+  "author": "Simon Comeau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SimonComeau/myResume/issues"
+  },
+  "homepage": "https://github.com/SimonComeau/myResume#readme"
+}
