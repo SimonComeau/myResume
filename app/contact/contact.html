@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Contact</title>
 </head>
-<body style="background-color: lightblue;">
+<body>
     <div class="contact-base" style="width:800px; height: 500px; border: 2px solid black;">
         <div class="contact-content-display">
             <div class="contact-info" style="position: absolute; width: 200px;">
@@ -34,7 +34,7 @@
                     </div>
                     <div class="contact-form-block">
                         <div>Message:</div>
-                        <textarea name="contact-form-message" style="padding: 5px; margin: 5px; width: 400px; height: 100px;" placeholder="Message"></textarea><br>
+                        <textarea name="contact-form-message"  maxlength="1000" style="padding: 5px; margin: 5px; width: 400px; height: 100px; resize: none;" placeholder="Message"></textarea><br>
                     </div>
                     <input type="submit" value="Send">
                     <input type="reset" value="Clear">
