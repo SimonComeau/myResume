@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Portfolio</title>
 </head>
-<body>
+<body ng-controller="portfolioController">
 <div class="portfolio-block">
     <div class="portfolio-intro">
-        <h2>These are the projects I have worked on.</h2>
+        <h2>These are the projects I have worked on.</h2>{{myname}}
     </div>
     <div class="portfolio-websites">
         <div class="portfolio-work-religionCares">
@@ -23,5 +23,8 @@
         </div>
     </div>
 </div>
+<script src="../../bower_components/angular/angular.js"></script>
+<script src="../app.js"></script>
+<script src="portfolio.controller.js"></script>
 </body>
 </html>
