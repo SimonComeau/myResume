@@ -1,6 +1,6 @@
-let dependencies = ["$scope"];
+let portfolioDependencies = ["$scope"];
 let portfolioController = function ($scope) {
     $scope.myname = "simon";
 };
-portfolioController.$inject=dependencies;
+portfolioController.$inject=portfolioDependencies;
 angular.module("simon").controller("portfolioController", portfolioController);

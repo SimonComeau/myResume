@@ -1,6 +1,13 @@
-let dependencies = ["$scope"];
+let contactDependencies = ["$scope"];
 let contactController = function ($scope) {
-    $scope.myname = "simon";
+    $scope.contact = {};
+    $scope.sendButton = function () {
+        console.log("send button clicked by " + $scope.contact.name);
+    };
+    $scope.clearButton = function () {
+        $scope.contact = {};
+        console.log("clear button clicked");
+    };
 };
-contactController.$inject=dependencies;
+contactController.$inject=contactDependencies;
 angular.module("simon").controller("contactController", contactController);
