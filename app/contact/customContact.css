@@ -1,16 +1,28 @@
 .container {
     width: 700px;
+    position: relative;
+    top: 150px;
 }
 .row {
-    display: inline-flex;
+    display: flex;
 }
 .form-control {
     border: none;
     height: auto;
 }
+.left-pane {
+    padding-top: 15px;
+    background: none;
+}
+.right-pane {
+    background: none;
+}
+.contact-email {
+    padding-top: 50px;
+}
 .social-media {
     position: relative;
-    bottom: 0;
+    bottom: -100px;
 }
 .textAreaMessage {
     padding: 5px;
