@@ -4,23 +4,27 @@
     <meta charset="UTF-8">
     <title>Portfolio</title>
 </head>
-<body>
+<body ng-controller="portfolioController">
 <div class="portfolio-block">
     <div class="portfolio-intro">
-        <p>These are the projects I have worked on.</p>
+        <h2>These are the projects I have worked on.</h2>{{myname}}
     </div>
     <div class="portfolio-websites">
         <div class="portfolio-work-religionCares">
-            <img src="..\content\websitePics\religionCares.png">
+            <img src="/app/content/websitePics/religionCares.png">
+            <img src="/app/content/websitePics/religionCaresCode.png">
         </div>
     </div>
     <div class="portfolio-programs">
-        <div class="porfolio-programs-dungeonDefendersCalculator">
+        <div class="portfolio-programs-dungeonDefendersCalculator">
+            <p>This tool was created to calculate the bonus given by a full set of gear in the Dungeon Defender game.</p>
             <img src="..\content\programPics\dunDefSetCalcToolCode-720.png">
             <img src="..\content\programPics\dunDefSetCalcToolUi.png">
         </div>
     </div>
-
 </div>
+<script src="../../bower_components/angular/angular.js"></script>
+<script src="/app/app.js"></script>
+<script src="portfolio.controller.js"></script>
 </body>
 </html>
