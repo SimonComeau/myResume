@@ -1,0 +1,21 @@
+.container {
+    width: 700px;
+}
+.row {
+    display: inline-flex;
+}
+.form-control {
+    border: none;
+    height: auto;
+}
+.social-media {
+    position: relative;
+    bottom: 0;
+}
+.textAreaMessage {
+    padding: 5px;
+    margin: 5px;
+    width: 400px;
+    height: 100px;
+    resize: none;
+}
