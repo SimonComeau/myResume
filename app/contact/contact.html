@@ -15,29 +15,28 @@
                     <img src="/app/logos/g-plus-logo.png" style="height: 40px;"></a>
             </div>
         </div>
-        <div class="form-control-inline col-sm-8 right-pane">
+        <form name="contactForm" class="form-control-inline col-sm-8 right-pane" ng-submit="sendButton()">
             <div class="form-group">
                 <label for="contactName">Name:</label><br>
-                <input id="contactName" type="text" ng-model="contact.name" required/>
+                <input id="contactName" type="text" ng-model="contact.name" required />
             </div>
             <div class="form-group">
                 <label>Email:</label><br>
-                <input type="text" ng-model="contact.email"/>
+                <input type="text" ng-model="contact.email" required />
             </div>
             <div class="form-group">
-                <label>Phone number:*</label><br>
-                <input type="text" ng-model="contact.phoneNumber"/>
+                <label>Phone number:</label><br>
+                <input type="text" ng-model="contact.phoneNumber" />
             </div>
             <div class="form-group">
                 <label>Message:<br>
                     <textarea class="textAreaMessage" maxlength="1000" ng-model="contact.message"></textarea>
                 </label>
                 <div class="button-group">
-                    <button class="btn btn-primary hvr-grow" ng-click="sendButton()">Send</button>
+                    <input type="submit" id="sendButton" value="Send" class="btn btn-primary hvr-grow" />
                     <button class="btn btn-warning hvr-grow" ng-click="clearButton()">Clear</button>
                 </div>
-                <p>* Required fields</p>
             </div>
-        </div>
+        </form>
     </div>
 </div>
