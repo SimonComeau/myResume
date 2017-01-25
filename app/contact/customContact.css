@@ -1,18 +1,9 @@
-.display {
-    border: 2px solid black;
-    border-radius: 10px;
-}
-.container {
-    width: 700px;
+.formDisplay {
+    width: 730px;
     position: relative;
     top: 150px;
-}
-.row {
-    display: flex;
-}
-.form-control {
-    border: none;
-    height: auto;
+    border: 2px solid black;
+    border-radius: 10px;
 }
 .left-pane {
     padding-top: 15px;
@@ -30,10 +21,12 @@
 }
 .textAreaMessage {
     padding: 5px;
-    margin: 5px;
     width: 400px;
     height: 100px;
     resize: none;
+}
+.form-control-inline > .form-group > input {
+    min-width: 200px;
 }
 /* Grow */
 .hvr-grow {
@@ -46,7 +39,6 @@
     transition-duration: 0.3s;
     transition-property: transform;
 }
-
 .hvr-grow:hover,
 .hvr-grow:focus,
 .hvr-grow:active {
