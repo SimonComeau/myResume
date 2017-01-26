@@ -1,5 +1,6 @@
 .formDisplay {
     width: 730px;
+    height: 400px;
     position: relative;
     top: 150px;
     border: 2px solid black;
@@ -11,19 +12,23 @@
 }
 .right-pane {
     background: none;
+    padding-top: 15px;
 }
 .contact-email {
     padding-top: 50px;
 }
 .social-media {
     position: relative;
-    bottom: -135px;
+    bottom: -155px;
 }
 .textAreaMessage {
     padding: 5px;
     width: 400px;
     height: 100px;
     resize: none;
+}
+.button-group {
+    padding-top: 5px;
 }
 .form-control-inline > .form-group > input {
     min-width: 200px;
