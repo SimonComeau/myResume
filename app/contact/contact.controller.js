@@ -1,8 +1,8 @@
-let contactDependencies = ["$scope"];
-let contactController = function ($scope) {
+let contactDependencies = ["$scope", "$http"];
+let contactController = function ($scope, $http) {
     $scope.contact = {};
     $scope.sendButton = function () {
-        console.log("send button clicked by " + $scope.contact.name);
+        $http.post("http://localhost:3030/api/contact", $scope.contact);
     };
     $scope.clearButton = function () {
         $scope.contact = {};

@@ -1,0 +1,51 @@
+.formDisplay {
+    width: 730px;
+    height: 400px;
+    position: relative;
+    top: 150px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.left-pane {
+    padding-top: 15px;
+    background: none;
+}
+.right-pane {
+    background: none;
+    padding-top: 15px;
+}
+.contact-email {
+    padding-top: 50px;
+}
+.social-media {
+    position: relative;
+    bottom: -155px;
+}
+.textAreaMessage {
+    padding: 5px;
+    width: 400px;
+    height: 100px;
+    resize: none;
+}
+.button-group {
+    padding-top: 5px;
+}
+.form-control-inline > .form-group > input {
+    min-width: 200px;
+}
+/* Grow */
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+    transform: scale(1.1);
+}
