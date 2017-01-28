@@ -274,4 +274,5 @@ __pycache__/
 # tools/**
 # !tools/packages.config
 bower_components/
-myResumeAPI/myResumeAPI/SecretSettings.config
+SecretSettings.config
+SecretConnection.config
