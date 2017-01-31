@@ -12,8 +12,7 @@ namespace myResumeAPI.Database
 
         public SimonDbContext()
         {
-            this.Database.Connection.ConnectionString = ConfigurationManager.ConnectionStrings["SimonDbContext"].ConnectionString;
-            //this.Database.Initialize(true);
+            Database.Connection.ConnectionString = ConfigurationManager.ConnectionStrings["SimonDbContext"].ConnectionString;
             Database.CreateIfNotExists();
         }
 

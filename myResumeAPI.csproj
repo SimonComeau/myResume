@@ -237,7 +237,9 @@
     <Content Include="ApiClassDiagram.cd" />
     <None Include="Project_Readme.html" />
     <Content Include="SecretSettings.config" />
-    <Content Include="SecretConnection.config" />
+    <Content Include="SecretConnection.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
