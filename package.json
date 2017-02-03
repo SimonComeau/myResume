@@ -9,7 +9,16 @@
     "karma": "^1.4.0",
     "protractor": "^5.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {"gulp": "*",
+    "gulp-uglify": "*",
+    "gulp-minify-css": "*",
+    "gulp-concat": "*",
+    "gulp-watch": "*",
+    "gulp-filter": "*",
+    "gulp-main-bower-files": "*",
+    "gulp-include": "*",
+    "webpack-stream": "*",
+    "babelify": "*"},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "http-server ./app -a localhost -p 8000 -c-1"
