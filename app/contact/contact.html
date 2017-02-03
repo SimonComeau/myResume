@@ -1,5 +1,5 @@
 <div ng-controller="contactController" class="container-fluid formDisplay">
-    <div class="row">
+    <div class="">
         <div class="col-sm-4 left-pane">
             <div>
                 <p>Please leave a message and I will get back to you as soon as possible. Thank you.</p>
@@ -15,28 +15,33 @@
                     <img src="/app/logos/g-plus-logo.png" style="height: 40px;"></a>
             </div>
         </div>
-        <form name="contactForm" class="form-control-inline col-sm-8 right-pane" ng-submit="sendButton()">
-            <div class="form-group">
-                <label for="contactName">Name:</label><br>
-                <input id="contactName" type="text" ng-model="contact.name" required />
-            </div>
-            <div class="form-group">
-                <label for="contactEmail">Email:</label><br>
-                <input id="contactEmail" type="text" ng-model="contact.email" required />
-            </div>
-            <div class="form-group">
-                <label for="contactPhoneNumber">Phone number:</label><br>
-                <input id="contactPhoneNumber" type="text" ng-model="contact.phoneNumber" />
-            </div>
-            <div class="form-group">
-                <label for="contactMessage">Message:<br>
-                    <textarea id="contactMessage" class="textAreaMessage" maxlength="1000" ng-model="contact.message"></textarea>
-                </label>
-                <div class="button-group">
-                    <input type="submit" id="sendButton" value="Send" class="btn btn-primary hvr-grow" />
-                    <button class="btn btn-warning hvr-grow" ng-click="clearButton()">Clear</button>
+        <form name="contactForm" layout="column" class="col-sm-8 right-pane" ng-submit="sendButton()">
+            <md-content layout="column" class="customContent">
+                <md-input-container class="customInputContainer">
+                    <label for="contactName" ng-required="true">Name:</label><br>
+                    <input required="" id="contactName" ng-model="contact.name" type="text"/>
+                    <div>
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="customInputContainer">
+                    <label for="contactEmail" ng-required="true">Email:</label><br>
+                    <input required="" id="contactEmail" ng-model="contact.email" type="email"/>
+                </md-input-container>
+                <md-input-container class="customInputContainer">
+                    <label for="contactPhoneNumber">Phone number:</label><br>
+                    <input id="contactPhoneNumber" ng-model="contact.phoneNumber" type="text"/>
+                </md-input-container>
+                <div>
+                    <label for="contactMessage">Message:</label><br>
+                    <textarea id="contactMessage" class="textAreaMessage" maxlength="1000"
+                              ng-model="contact.message"></textarea>
                 </div>
-            </div>
+                <div class="button-group">
+                    <input type="submit" id="sendButton" value="Send" class="btn btn-primary"/>
+                    <button class="btn btn-warning" ng-click="clearButton()">Clear</button>
+                </div>
+            </md-content>
         </form>
     </div>
 </div>

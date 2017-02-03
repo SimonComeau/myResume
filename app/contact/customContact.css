@@ -1,34 +1,38 @@
 .formDisplay {
+    background: #eaeaea;
     width: 730px;
-    height: 400px;
+    height: 540px;
     position: relative;
     top: 150px;
-    border: 2px solid black;
     border-radius: 10px;
 }
 .left-pane {
     padding-top: 15px;
-    background: none;
 }
 .right-pane {
-    background: none;
-    padding-top: 15px;
+    padding: 15px;
 }
 .contact-email {
     padding-top: 50px;
 }
 .social-media {
     position: relative;
-    bottom: -155px;
+    bottom: -300px;
 }
 .textAreaMessage {
     padding: 5px;
-    width: 400px;
-    height: 100px;
+    width: 435px;
+    height: 145px;
     resize: none;
 }
 .button-group {
-    padding-top: 5px;
+    padding-top: 15px;
+}
+.customContent {
+    background: none;
+}
+.customInputContainer {
+    margin-bottom: 0;
 }
 .form-control-inline > .form-group > input {
     min-width: 200px;
