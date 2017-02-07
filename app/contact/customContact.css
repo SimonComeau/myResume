@@ -5,12 +5,10 @@
     position: relative;
     top: 150px;
     border-radius: 10px;
+    padding: 0;
 }
 .left-pane {
     padding-top: 15px;
-}
-.right-pane {
-    padding: 15px;
 }
 .contact-email {
     padding-top: 50px;
@@ -19,12 +17,6 @@
     position: relative;
     bottom: -300px;
 }
-.textAreaMessage {
-    padding: 5px;
-    width: 435px;
-    height: 145px;
-    resize: none;
-}
 .button-group {
     padding-top: 15px;
 }
@@ -32,6 +24,14 @@
     background: none;
 }
 .customInputContainer {
+    margin-bottom: 0;
+}
+textarea.md-input {
+    max-height: 150px;
+    overflow: auto;
+}
+.customInputContainerTextArea {
+    height: 170px;
     margin-bottom: 0;
 }
 .form-control-inline > .form-group > input {

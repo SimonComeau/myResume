@@ -16,27 +16,29 @@
             </div>
         </div>
         <form name="contactForm" layout="column" class="col-sm-8 right-pane" ng-submit="sendButton()">
-            <md-content layout="column" class="customContent">
-                <md-input-container class="customInputContainer">
-                    <label for="contactName" ng-required="true">Name:</label><br>
-                    <input required="" id="contactName" ng-model="contact.name" type="text"/>
-                    <div>
+            <md-content name="contactForm" layout="column" class="col-sm-8 customContent">
+                <md-input-container class="md-block customInputContainer">
+                    <label for="contactName">Name:</label><br>
+                    <input ng-required="true" id="contactName" ng-model="contact.name" type="text"/>
+                    <div ng-messages="contactForm.contactName.$error">
                         <div ng-message="required">This is required.</div>
                     </div>
                 </md-input-container>
-                <md-input-container class="customInputContainer">
-                    <label for="contactEmail" ng-required="true">Email:</label><br>
-                    <input required="" id="contactEmail" ng-model="contact.email" type="email"/>
+                <md-input-container class="md-block customInputContainer">
+                    <label for="contactEmail">Email:</label><br>
+                    <input ng-required="true" id="contactEmail" ng-model="contact.email" type="email"/>
+                    <div ng-messages="contactForm.contactEmail.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
                 </md-input-container>
-                <md-input-container class="customInputContainer">
+                <md-input-container class="md-block customInputContainer">
                     <label for="contactPhoneNumber">Phone number:</label><br>
                     <input id="contactPhoneNumber" ng-model="contact.phoneNumber" type="text"/>
                 </md-input-container>
-                <div>
+                <md-input-container class="md-block customInputContainerTextArea">
                     <label for="contactMessage">Message:</label><br>
-                    <textarea id="contactMessage" class="textAreaMessage" maxlength="1000"
-                              ng-model="contact.message"></textarea>
-                </div>
+                    <textarea id="contactMessage" class="md-input" ng-model="contact.message"></textarea>
+                </md-input-container>
                 <div class="button-group">
                     <input type="submit" id="sendButton" value="Send" class="btn btn-primary"/>
                     <button class="btn btn-warning" ng-click="clearButton()">Clear</button>
