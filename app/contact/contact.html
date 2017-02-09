@@ -15,8 +15,8 @@
                     <img src="/app/logos/g-plus-logo.png" style="height: 40px;"></a>
             </div>
         </div>
-        <form name="contactForm" layout="column" class="col-sm-8 right-pane" ng-submit="sendButton()">
-            <md-content name="contactForm" layout="column" class="col-sm-8 customContent">
+        <md-content layout="column" class="col-sm-8 customContent">
+            <form name="contactForm" class="right-pane" ng-submit="sendButton()">
                 <md-input-container class="md-block customInputContainer">
                     <label for="contactName">Name:</label><br>
                     <input ng-required="true" id="contactName" ng-model="contact.name" type="text"/>
@@ -43,7 +43,8 @@
                     <input type="submit" id="sendButton" value="Send" class="btn btn-primary"/>
                     <button class="btn btn-warning" ng-click="clearButton()">Clear</button>
                 </div>
-            </md-content>
-        </form>
+            </form>
+        </md-content>
+
     </div>
 </div>
