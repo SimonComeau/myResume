@@ -9,16 +9,22 @@
 }
 .left-pane {
     padding-top: 15px;
+    height: 100%;
+}
+.right-pane {
+    padding-top: 15px;
+    height: 100%;
 }
 .contact-email {
     padding-top: 50px;
 }
 .social-media {
-    position: relative;
-    bottom: -300px;
+    position: absolute;
+    bottom: 15px;
 }
 .button-group {
-    padding-top: 15px;
+    position: absolute;
+    bottom: 9px;
 }
 .customContent {
     background: none;
@@ -26,30 +32,24 @@
 .customInputContainer {
     margin-bottom: 0;
 }
-textarea.md-input {
-    max-height: 150px;
+textarea {
+    height: 9em;
+    max-height: 9em;
+    overflow: auto;
+}
+.md-resize-handle {
+    visibility: hidden;
+    display: none;
+}
+.md-resize-wrapper {
+    height: 9em;
+    max-height: 9em;
     overflow: auto;
 }
 .customInputContainerTextArea {
-    height: 170px;
+    height: 9em;
     margin-bottom: 0;
 }
 .form-control-inline > .form-group > input {
     min-width: 200px;
-}
-/* Grow */
-.hvr-grow {
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform;
-}
-.hvr-grow:hover,
-.hvr-grow:focus,
-.hvr-grow:active {
-    transform: scale(1.1);
 }
