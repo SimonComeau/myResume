@@ -1,56 +1,49 @@
 var gulp = require("gulp");
+var minify = require("gulp-clean-css");
 var uglify = require("gulp-uglify");
-var minify = require("gulp-minify-css");
 var concat = require("gulp-concat");
 var watch = require("gulp-watch");
-var filter = require("gulp-filter");
-var bowerFiles = require("gulp-main-bower-files");
-var include = require("gulp-include");
-var webpack = require("webpack-stream");
-var src = {
-    css: ["bower_components/**/*.css", "app/**/*.css"],
-    js: ["app/**/*.js", "bower_components/**/*.js"],
-    bower: ["bower.json"]
-};
-var publishedDir = "/";
 
-gulp.task ("bower", function(){
-   var jsFilter = filter ("**/*.js", {restore: true});
-   var cssFilter = filter ("**/*.css", {restore: true});
-   return bowerFiles()
-       .pipe(jsFilter)
-       .pipe(gulp.dest("/"))
-       .pipe(jsFilter.restore)
-       .pipe(cssFilter)
-       .pipe(gulp.dest("/"))
-       .pipe(cssFilter.restore)
-});
-function buildJs () {
-    return gulp.src(src.js)
-        .pipe(include())
-        .pipe(gulp.dest("/"))
-}
-function buildCss (){
+var src = {
+    css: ["bower_components/bootstrap/dist/css/bootstrap.css",
+        "bower_components/angular-bootstrap/ui-bootstrap-csp.css",
+        "bower_components/hover/css/hover.css",
+        "bower_components/angular-material/angular-material.css",
+        "app/contact/customContact.css"],
+     js: ["bower_components/angular/angular.js",
+        "bower_components/angular-ui-router/release/angular-ui-router.js",
+        "bower_components/jquery/dist/jquery.js",
+        "bower_components/bootstrap/dist/js/bootstrap.js",
+        "bower_components/angular-bootstrap/ui-bootstrap.js",
+        "bower_components/angular-animate/angular-animate.js",
+        "bower_components/angular-aria/angular-aria.js",
+        "bower_components/angular-material/angular-material.js",
+        "app/app.js",
+        "app/home/menu.controller.js",
+        "app/home/home.controller.js",
+        "app/contact/contact.controller.js",
+        "app/portfolio/portfolio.controller.js"]
+};
+var buildCss = function () {
     return gulp.src(src.css)
-        .pipe(gulp.dest("/"))
-}
+        .pipe(concat("all.css"))
+        .pipe(minify())
+        .pipe(gulp.dest("./"))
+};
+var buildJs = function () {
+    return gulp.src(src.js)
+        .pipe(concat("all.js"))
+        .pipe(uglify())
+        .pipe(gulp.dest("./"))
+};
 gulp.task ("css", buildCss);
 gulp.task ("js", buildJs);
-gulp.task ("watch", function () {
-   gulp.watch(src.bower, ["bower"]);
-    watch({ glob: src.css, name: "app.css"}, buildCss);
-    watch({glob: src.js, name: "app.js"}, buildJs);
+gulp.task ("build", ["css", "js"]);
+
+gulp.task ("watchCss", function () {
+    return watch(src.css, buildCss);
 });
-gulp.task ("compress-css", ["css"], function () {
-    return gulp.src("/")
-        .pipe(minify())
-        .pipe(gulp.dest("/"))
+gulp.task ("watchJs", function () {
+    return watch(src.js,buildJs);
 });
-gulp.task ("compress-js", ["js"], function () {
-    return gulp.src("/")
-        .pipe(uglify())
-        .pipe(gulp.dest("/"))
-});
-gulp.task ("compress", ["compress-css", "compress-js"]);
-gulp.task ("default", ["bower", "css", "js"]);
-gulp.task ("build", ["bower", "compress"]);
+gulp.task ("watch", ["watchCss", "watchJs"]);

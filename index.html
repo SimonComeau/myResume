@@ -4,24 +4,21 @@
     <meta charset="UTF-8">
     <title>Main</title>
     <base href="/">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
-    <link rel="stylesheet" href="bower_components/hover/css/hover.css">
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
-    <link rel="stylesheet" href="app/contact/customContact.css">
+    <link rel="stylesheet" href="all.css">
 </head>
 <body style="background: #CFD8DC">
+<div ng-controller="menuController" ng-cloak>
+    <md-content class="md-padding" style="background: transparent; width: 730px; margin-left: auto; margin-right: auto;">
+        <md-nav-bar
+                md-selected-nav-item="currentNavItem"
+                nav-bar-aria-label="navigation links">
+            <md-nav-item ng-repeat="menuItem in menuItems" md-nav-sref="{{menuItem.name}}" name="{{menuItem.name}}">
+                {{menuItem.name}}
+            </md-nav-item>
+        </md-nav-bar>
+    </md-content>
+</div>
 <ui-view></ui-view>
-<script src="/bower_components/angular/angular.js"></script>
-<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-aria/angular-aria.js"></script>
-<script src="bower_components/angular-material/angular-material.js"></script>
-<script src="/app/app.js"></script>
-<script src="/app/contact/contact.controller.js"></script>
-<script src="/app/portfolio/portfolio.controller.js"></script>
+<script src="all.js"></script>
 </body>
 </html>

@@ -3,27 +3,20 @@
     width: 730px;
     height: 540px;
     position: relative;
-    top: 150px;
-    border-radius: 10px;
     padding: 0;
 }
-.left-pane {
-    padding-top: 15px;
-    height: 100%;
-}
-.right-pane {
+.left-pane, .right-pane {
     padding-top: 15px;
     height: 100%;
 }
 .contact-email {
     padding-top: 50px;
 }
-.social-media {
+.social-media, .button-group {
     position: absolute;
     bottom: 15px;
 }
 .button-group {
-    position: absolute;
     bottom: 9px;
 }
 .customContent {
@@ -32,7 +25,7 @@
 .customInputContainer {
     margin-bottom: 0;
 }
-textarea {
+textarea, .md-resize-wrapper {
     height: 9em;
     max-height: 9em;
     overflow: auto;
@@ -40,11 +33,6 @@ textarea {
 .md-resize-handle {
     visibility: hidden;
     display: none;
-}
-.md-resize-wrapper {
-    height: 9em;
-    max-height: 9em;
-    overflow: auto;
 }
 .customInputContainerTextArea {
     height: 9em;
