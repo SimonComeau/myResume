@@ -274,7 +274,5 @@ __pycache__/
 # tools/**
 # !tools/packages.config
 bower_components/
-SecretSettings.config
-SecretConnection.config
-1and1.connection.config
-1and1.settings.config
+Settings/**
+siteFiles/**

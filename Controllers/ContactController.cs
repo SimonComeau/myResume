@@ -1,6 +1,5 @@
 ﻿using myResumeAPI.Models;
 using System;
-using System.Diagnostics;
 using System.Net.Mail;
 using System.Web.Http;
 using myResumeAPI.Database;
@@ -10,11 +9,10 @@ namespace myResumeAPI.Controllers
 {
     public class ContactController : ApiController
     {
-        // POST api/contact
         [HttpPost]
+        [Route("api/contact")]
         public void Post([FromBody] Contact contact)
         {
-            Debugger.Launch();
             var mailClient = new OneAndOneSmtpClient();
             var message = GetMailMessageFromContact(contact);
             mailClient.Send(message);
@@ -24,7 +22,12 @@ namespace myResumeAPI.Controllers
                 db.SaveChanges();
             }
         }
-        
+        //[HttpGet]
+        //public IHttpActionResult Get()
+        //{
+        //    return Ok("piggy oink oink");
+        //}
+
         private static MailMessage GetMailMessageFromContact(Contact contact)
         {
             var fromAddress = new MailAddress(contact.Email);
@@ -36,7 +39,6 @@ namespace myResumeAPI.Controllers
             };
             message.To.Add("nomismoc@gmail.com");
             message.To.Add("contact@simoncomeau.com");
-            message.To.Add("codencrazy@gmail.com");
             return message;
         }
     }

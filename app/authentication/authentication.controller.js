@@ -1,7 +1,6 @@
 // TODO: rename to authController
-//TODO: rename logoff to logout eventually for consistency
 // TODO: logout needs a confirmation dialogue
-// TODO: toast for logoff event
+// TODO: toast for logout event
 let loginController = function ($scope, $http, $log, $state, loginService, $rootScope) {
     $scope.user = {};
     $scope.loginButton = function () {
@@ -15,8 +14,8 @@ let loginController = function ($scope, $http, $log, $state, loginService, $root
         $scope.loginForm.$setPristine();
         $scope.loginForm.$setUntouched();
     };
-    if ($state.$current.name == "logoff") {
-        loginService.logoff();
+    if ($state.$current.name == "logout") {
+        loginService.logout();
     }
 };
 angular.module("simon").controller("loginController", loginController);

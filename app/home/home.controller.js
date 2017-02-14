@@ -1,5 +1,2 @@
-let homeDependencies = ["$scope", "$http"];
-let homeController = function ($scope, $http) {
-};
-homeController.$inject=homeDependencies;
+let homeController = function ($scope, $http) {};
 angular.module("simon").controller("homeController", homeController);

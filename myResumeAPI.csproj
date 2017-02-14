@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\AuthenticationService.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\Session.cs" />
     <Compile Include="Database\SimonDbContext.cs" />
     <Compile Include="MailClients\OneAndOneSmtpClient.cs" />
     <Compile Include="Global.asax.cs">
@@ -222,36 +223,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="all.css" />
-    <Content Include="all.js" />
-    <Content Include="app\app.js" />
-    <Content Include="app\config\stateConfig.js" />
-    <Content Include="app\contact\contact.controller.js" />
-    <Content Include="app\contact\contact.html" />
-    <Content Include="app\contact\customContact.css" />
-    <Content Include="app\contact\messageDetails.html" />
-    <Content Include="app\contact\messageList.html" />
-    <Content Include="app\content\programPics\dunDefSetCalcToolCode-720.png" />
-    <Content Include="app\content\programPics\dunDefSetCalcToolCode.png" />
-    <Content Include="app\content\programPics\dunDefSetCalcToolUi.png" />
-    <Content Include="app\content\websitePics\religionCares.jpg" />
-    <Content Include="app\content\websitePics\religionCares.png" />
-    <Content Include="app\content\websitePics\religionCaresCode.png" />
-    <Content Include="app\home\home.controller.js" />
-    <Content Include="app\home\home.html" />
-    <Content Include="app\home\menu.controller.js" />
-    <Content Include="app\logIn\login.controller.js" />
-    <Content Include="app\logIn\login.css" />
-    <Content Include="app\logIn\login.html" />
-    <Content Include="app\logIn\login.service.js" />
-    <Content Include="app\logos\g-plus-logo.png" />
-    <Content Include="app\logos\linkedin-logo-3.png" />
-    <Content Include="app\portfolio\portfolio.controller.js" />
-    <Content Include="app\portfolio\portfolio.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -259,14 +234,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="index.html" />
-    <Content Include="bower.json" />
-    <Content Include="package.json" />
-    <Content Include="1and1.settings.config" />
-    <Content Include="1and1.connection.config" />
+    <Content Include="Settings\1and1.settings.config" />
+    <Content Include="Settings\1and1.connection.config" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="README.md" />
@@ -301,7 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="ApiClassDiagram.cd" />
+    <Content Include="Settings\ApiClassDiagram.cd" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
@@ -311,8 +280,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Project_Readme.html" />
-    <Content Include="SecretSettings.config" />
-    <Content Include="SecretConnection.config">
+    <Content Include="Settings\SecretSettings.config" />
+    <Content Include="Settings\SecretConnection.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

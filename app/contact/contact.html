@@ -19,7 +19,7 @@
             <label>Name:</label><br>
             <input required name="contactName" ng-model="contact.name" type="text"/>
             <div ng-messages="contactForm.contactName.$error"
-                 ng-show="(contactForm.$submitted || contactForm.contactName.$touched) && contactForm.contactName.$invalid ">
+                 ng-show="checkForInvalid(contactForm.contactName)">
                 <div ng-message="required">This is required.</div>
             </div>
         </md-input-container>
@@ -27,7 +27,7 @@
             <label>Email:</label><br>
             <input required name="contactEmail" ng-model="contact.email" type="text"/>
             <div ng-messages="contactForm.contactEmail.$error"
-                 ng-show="(contactForm.$submitted || contactForm.contactEmail.$touched) && contactForm.contactEmail.$invalid">
+                 ng-show="checkForInvalid(contactForm.contactEmail)">
                 <div ng-message="required">This is required.</div>
             </div>
         </md-input-container>
@@ -40,7 +40,9 @@
             <textarea id="contactMessage" class="md-input" ng-model="contact.message"></textarea>
         </md-input-container>
         <div class="button-group">
-            <md-button type="submit" class="md-primary md-raised" ng-click="sendButton()">Send</md-button>
+            <md-button type="submit" class="md-primary md-raised" ng-disabled="contactForm.$invalid"
+                       ng-click="sendButton()">Send
+            </md-button>
             <md-button class="md-warn md-raised" ng-click="clearButton()">Clear</md-button>
         </div>
     </form>

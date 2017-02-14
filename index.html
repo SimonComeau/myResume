@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <title>Main</title>
     <base href="/">
-    <link rel="stylesheet" href="all.css">
+    <link rel="stylesheet" href="/siteFiles/all.css">
 </head>
 <body style="background: #CFD8DC">
 <div ng-controller="menuController" ng-cloak>
-    <md-content class="md-padding" style="background: transparent; width: 730px; margin-left: auto; margin-right: auto;">
+    <md-content class="md-padding"
+                style="background: transparent; width: 730px; margin-left: auto; margin-right: auto;">
         <md-nav-bar
                 md-selected-nav-item="currentNavItem"
                 nav-bar-aria-label="navigation links">
-            <md-nav-item ng-repeat="menuItem in menuItems" md-nav-sref="{{menuItem.name}}" name="{{menuItem.name}}">
+            <md-nav-item ng-repeat="menuItem in menuItems" md-nav-sref="{{menuItem.name}}" name="{{menuItem.name}}"
+                         value="{{menuItem.name}}">
                 {{menuItem.name}}
             </md-nav-item>
         </md-nav-bar>
     </md-content>
 </div>
 <ui-view></ui-view>
-<script src="all.js"></script>
+<script src="/siteFiles/all.js"></script>
 </body>
 </html>

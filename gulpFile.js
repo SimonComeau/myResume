@@ -22,8 +22,10 @@ var src = {
         "bower_components/angular-animate/angular-animate.js",
         "bower_components/angular-aria/angular-aria.js",
         "bower_components/angular-material/angular-material.js",
+        "bower_components/js-sha512/build/sha512.min.js",
         "app/app.js",
         "app/config/stateConfig.js",
+        "bower_components/js-scrypt/browser/scrypt.js",
         "app/login/login.service.js",
         "app/home/menu.controller.js",
         "app/home/home.controller.js",
@@ -35,13 +37,13 @@ var buildCss = function () {
     return gulp.src(src.css)
         .pipe(concat("all.css"))
         .pipe(minify())
-        .pipe(gulp.dest("./"))
+        .pipe(gulp.dest("./siteFiles"))
 };
 var buildJs = function () {
     return gulp.src(src.js)
         .pipe(concat("all.js"))
         // .pipe(uglify())
-        .pipe(gulp.dest("./"))
+        .pipe(gulp.dest("./siteFiles"))
 };
 gulp.task("css", buildCss);
 gulp.task("js", buildJs);

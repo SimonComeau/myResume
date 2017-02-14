@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace myResumeAPI.Controllers
@@ -7,13 +6,12 @@ namespace myResumeAPI.Controllers
     {
         private AuthenticationService()
         {
-            IsLoggedIn = false;
+           
         }
 
         private static AuthenticationService _instance;
 
         public static AuthenticationService Instance => _instance ?? (_instance = new AuthenticationService());
-        public bool IsLoggedIn { get; set; }
-        public Dictionary<int, Guid> SessionLookUp { get; } = new Dictionary<int, Guid>();
+        public Dictionary<int, Session> SessionLookUp { get; } = new Dictionary<int, Session>();
     }
 }
