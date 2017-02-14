@@ -230,6 +230,8 @@
     <Content Include="app\contact\contact.controller.js" />
     <Content Include="app\contact\contact.html" />
     <Content Include="app\contact\customContact.css" />
+    <Content Include="app\contact\messageDetails.html" />
+    <Content Include="app\contact\messageList.html" />
     <Content Include="app\content\programPics\dunDefSetCalcToolCode-720.png" />
     <Content Include="app\content\programPics\dunDefSetCalcToolCode.png" />
     <Content Include="app\content\programPics\dunDefSetCalcToolUi.png" />
@@ -239,6 +241,10 @@
     <Content Include="app\home\home.controller.js" />
     <Content Include="app\home\home.html" />
     <Content Include="app\home\menu.controller.js" />
+    <Content Include="app\logIn\login.controller.js" />
+    <Content Include="app\logIn\login.css" />
+    <Content Include="app\logIn\login.html" />
+    <Content Include="app\logIn\login.service.js" />
     <Content Include="app\logos\g-plus-logo.png" />
     <Content Include="app\logos\linkedin-logo-3.png" />
     <Content Include="app\portfolio\portfolio.controller.js" />

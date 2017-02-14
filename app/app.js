@@ -20,6 +20,24 @@ mymodule.config(["$stateProvider", "$locationProvider", "$httpProvider", functio
         controller: "contactController",
         menuItem: true
     });
+    $stateProvider.state("messages", {
+        url: "/contact/messages",
+        templateUrl: "/app/contact/messageList.html",
+        controller: "contactController",
+        menuItem: true,
+        requiresAuthentication: true
+    });
+    $stateProvider.state("messageDetails", {
+        templateUrl: "/app/contact/messageDetails.html",
+        controller: "contactController",
+        requiresAuthentication: true
+    });
+    $stateProvider.state("login", {
+        url: "/login",
+        templateUrl: "/app/login/login.html",
+        controller: "loginController",
+        menuItem: true
+    })
 }]);
 mymodule.controller("appController", function ($scope) {
     $scope.currentNavItem = 'home';
