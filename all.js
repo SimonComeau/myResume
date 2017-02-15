@@ -97921,15 +97921,18 @@ angular.module("material.core").constant("$MD_THEME_CSS", "md-autocomplete.md-TH
 
 
 })(window, window.angular);;window.ngMaterial={version:{full: "1.1.3"}};
+// TODO: toast handle errors, email failure, that kind of things...
 let mymodule = angular.module("simon", ["ui.router", "ui.bootstrap", "ngMaterial", "ngAnimate", "ngAria"]);
-mymodule.config(["$locationProvider", "$httpProvider", function ($locationProvider, $httpProvider) {
+mymodule.config(function ($locationProvider, $httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     $locationProvider.html5Mode(true);
-}]);
+});
 mymodule.controller("appController", function ($scope) {
     $scope.currentNavItem = 'home';
 });
 angular.element(() => angular.bootstrap(document, ["simon"]));
+// TODO: toast for otherwise, state not found
+// TODO: toast for unauthorized access, plz login
 angular.module("simon").config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state("home", {
         url: "/",
@@ -97967,6 +97970,12 @@ angular.module("simon").config(function ($stateProvider, $urlRouterProvider) {
         controller: "loginController",
         menuItem: true
     });
+    $stateProvider.state("logoff", {
+        url:"/logoff",
+        controller: "loginController",
+        requiresAuthentication: true,
+        menuItem: true
+    });
     $urlRouterProvider.otherwise(function ($injector) {
         var $state = $injector.get("$state");
         $state.go("home");
@@ -97980,27 +97989,49 @@ angular.module("simon").run(function ($rootScope, $state, loginService) {
         }
     });
 });
-let loginServiceDependencies = ["$http", "$log"];
-let loginService = function ($http, $log) {
+// TODO: rename to authentication service
+// TODO: redirect toState if state is invalid instead of just home screen
+let loginService = function ($http, $rootScope, $state) {
     var login = {};
-    login.isLoggedIn = false;
+    login.authenticateUser = function (username, password) {
+        return $http.post("/api/authentication/login", {username: username, password: password}).then(() => {
+            $rootScope.$emit("RefreshMenu");
+            $state.go("home");
+            //TODO: toast for login success
+        }, () => {
+            $rootScope.$emit("RefreshMenu");
+            //TODO: toast saying login failed
+        });
+    };
+    login.isLoggedIn = function () {
+        return $http.get("/api/authentication/isloggedin");
+    };
+    login.logoff = function () {
+        return $http.post("/api/authentication/logoff").then(() => {
+            $rootScope.$emit("RefreshMenu");
+            $state.go("home");
+            //TODO: toast saying logoff success
+        });
+    };
     return login;
 };
-loginService.$inject = loginServiceDependencies;
 angular.module("simon").factory("loginService", loginService);
 
-let menuDependencies = ["$scope", "$http", "$state", "loginService", "$rootScope"];
+//TODO: hide login button if already logged in
+//TODO: build a list of menuItems without requiresAuthentication routes, only add IF logged in, reverse current logic, BAD BAD at the moment
+//TODO: have order property for menuItems, with default values to organize order of lineup OR filter function with and without auth
 let menuController = function ($scope, $http, $state, loginService, $rootScope) {
     $scope.refreshMenu = function () {
         $scope.menuItems = $state.get().filter(m => m.menuItem == true);
-        if (!loginService.isLoggedIn) {
-            $scope.menuItems = $scope.menuItems.filter(m => typeof m.requiresAuthentication == 'undefined' || m.requiresAuthentication != true);
-        }
+        loginService.isLoggedIn().then(response => {
+            if (response.data == false) {
+                $scope.menuItems = $scope.menuItems.filter(m => typeof m.requiresAuthentication == 'undefined' || m.requiresAuthentication != true);
+            }
+        });
     };
     $scope.refreshMenu();
     $rootScope.$on("RefreshMenu", $scope.refreshMenu);
 };
-menuController.$inject = menuDependencies;
 angular.module("simon").controller("menuController", menuController);
 
 let homeDependencies = ["$scope", "$http"];
@@ -98009,7 +98040,8 @@ let homeController = function ($scope, $http) {
 homeController.$inject=homeDependencies;
 angular.module("simon").controller("homeController", homeController);
 
-let contactDependencies = ["$scope", "$http"];
+// TODO: toast for successful email delivery
+// TODO: after submit of an email set form to untouched and grey out submit button until clear is clicked or form it touched
 let contactController = function ($scope, $http) {
     $scope.contact = {};
     $scope.sendButton = function () {
@@ -98024,16 +98056,16 @@ let contactController = function ($scope, $http) {
         $scope.contactForm.$setUntouched();
     };
 };
-contactController.$inject = contactDependencies;
 angular.module("simon").controller("contactController", contactController);
-let loginDependencies = ["$scope", "$http", "$log", "$state","loginService", "$rootScope"];
+// TODO: rename to authController
+//TODO: rename logoff to logout eventually for consistency
+// TODO: logout needs a confirmation dialogue
+// TODO: toast for logoff event
 let loginController = function ($scope, $http, $log, $state, loginService, $rootScope) {
     $scope.user = {};
     $scope.loginButton = function () {
         if ($scope.loginForm.$valid) {
-            loginService.isLoggedIn = true;
-            $rootScope.$emit("RefreshMenu");
-            $state.go("home");
+            loginService.authenticateUser($scope.user.name, $scope.user.password);
         }
     };
     $scope.clearButton = function () {
@@ -98042,13 +98074,13 @@ let loginController = function ($scope, $http, $log, $state, loginService, $root
         $scope.loginForm.$setPristine();
         $scope.loginForm.$setUntouched();
     };
+    if ($state.$current.name == "logoff") {
+        loginService.logoff();
+    }
 };
-loginController.$inject = loginDependencies;
 angular.module("simon").controller("loginController", loginController);
 
-let portfolioDependencies = ["$scope"];
 let portfolioController = function ($scope) {
     $scope.myname = "simon";
 };
-portfolioController.$inject=portfolioDependencies;
 angular.module("simon").controller("portfolioController", portfolioController);

@@ -1,11 +1,12 @@
-let loginDependencies = ["$scope", "$http", "$log", "$state","loginService", "$rootScope"];
+// TODO: rename to authController
+//TODO: rename logoff to logout eventually for consistency
+// TODO: logout needs a confirmation dialogue
+// TODO: toast for logoff event
 let loginController = function ($scope, $http, $log, $state, loginService, $rootScope) {
     $scope.user = {};
     $scope.loginButton = function () {
         if ($scope.loginForm.$valid) {
-            loginService.isLoggedIn = true;
-            $rootScope.$emit("RefreshMenu");
-            $state.go("home");
+            loginService.authenticateUser($scope.user.name, $scope.user.password);
         }
     };
     $scope.clearButton = function () {
@@ -14,6 +15,8 @@ let loginController = function ($scope, $http, $log, $state, loginService, $root
         $scope.loginForm.$setPristine();
         $scope.loginForm.$setUntouched();
     };
+    if ($state.$current.name == "logoff") {
+        loginService.logoff();
+    }
 };
-loginController.$inject = loginDependencies;
 angular.module("simon").controller("loginController", loginController);

@@ -1,3 +1,6 @@
+// TODO: run only if files are modified, on every run of build update json file with 2 value, last date css date last date js date, go through src files and get newest modified date, investigate CHECKSUM, build css only if css is required, build js only if js is required
+// TODO: only minify or uglify on production not debug environment
+// TODO: restart watch if an error is hit
 var gulp = require("gulp");
 var minify = require("gulp-clean-css");
 var uglify = require("gulp-uglify");

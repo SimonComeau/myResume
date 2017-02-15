@@ -1,4 +1,5 @@
-let contactDependencies = ["$scope", "$http"];
+// TODO: toast for successful email delivery
+// TODO: after submit of an email set form to untouched and grey out submit button until clear is clicked or form it touched
 let contactController = function ($scope, $http) {
     $scope.contact = {};
     $scope.sendButton = function () {
@@ -13,5 +14,4 @@ let contactController = function ($scope, $http) {
         $scope.contactForm.$setUntouched();
     };
 };
-contactController.$inject = contactDependencies;
 angular.module("simon").controller("contactController", contactController);

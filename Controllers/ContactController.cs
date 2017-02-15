@@ -14,6 +14,7 @@ namespace myResumeAPI.Controllers
         [HttpPost]
         public void Post([FromBody] Contact contact)
         {
+            Debugger.Launch();
             var mailClient = new OneAndOneSmtpClient();
             var message = GetMailMessageFromContact(contact);
             mailClient.Send(message);
@@ -23,7 +24,7 @@ namespace myResumeAPI.Controllers
                 db.SaveChanges();
             }
         }
-
+        
         private static MailMessage GetMailMessageFromContact(Contact contact)
         {
             var fromAddress = new MailAddress(contact.Email);

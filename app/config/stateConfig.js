@@ -1,3 +1,5 @@
+// TODO: toast for otherwise, state not found
+// TODO: toast for unauthorized access, plz login
 angular.module("simon").config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state("home", {
         url: "/",
@@ -33,6 +35,12 @@ angular.module("simon").config(function ($stateProvider, $urlRouterProvider) {
         url: "/login",
         templateUrl: "/app/login/login.html",
         controller: "loginController",
+        menuItem: true
+    });
+    $stateProvider.state("logoff", {
+        url:"/logoff",
+        controller: "loginController",
+        requiresAuthentication: true,
         menuItem: true
     });
     $urlRouterProvider.otherwise(function ($injector) {
