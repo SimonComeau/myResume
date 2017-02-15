@@ -20,6 +20,7 @@ var src = {
         "bower_components/angular-aria/angular-aria.js",
         "bower_components/angular-material/angular-material.js",
         "app/app.js",
+        "app/config/stateConfig.js",
         "app/login/login.service.js",
         "app/home/menu.controller.js",
         "app/home/home.controller.js",
@@ -36,7 +37,7 @@ var buildCss = function () {
 var buildJs = function () {
     return gulp.src(src.js)
         .pipe(concat("all.js"))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest("./"))
 };
 gulp.task("css", buildCss);
