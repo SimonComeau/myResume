@@ -1,4 +1,3 @@
-// TODO: rename to authentication service
 // TODO: redirect toState if state is invalid instead of just home screen
 let authenticationService = function ($http, $rootScope, $state) {
     let authentication = {};
@@ -10,6 +9,7 @@ let authenticationService = function ($http, $rootScope, $state) {
         sessionStorage.setItem("sessionId", sessionId);
         return sessionId;
     };
+    // TODO: use formatted strings template
     let loginUrl = "/api/authentication/login/" + authentication.getSessionId();
     let logoutUrl = "/api/authentication/logout/" + authentication.getSessionId();
     let isLoggedInUrl = "/api/authentication/isloggedin/" + authentication.getSessionId();
@@ -35,7 +35,10 @@ let authenticationService = function ($http, $rootScope, $state) {
     };
     $http.get(getAuthTokenUrl).then(authentication.setAuthToken);
     authentication.isLoggedIn = () => $http.get(isLoggedInUrl);
-    authentication.logout = () => $http.post(logoutUrl).then(authentication.goHomeAfterLoginStateChange);
+    authentication.logout = () => {
+        $http.post(logoutUrl).then(authentication.goHomeAfterLoginStateChange);
+        // TODO: toast for logout event
+    };
     return authentication;
 };
 angular.module("simon").factory("authenticationService", authenticationService);

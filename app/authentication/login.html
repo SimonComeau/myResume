@@ -17,7 +17,7 @@
             </div>
         </md-input-container>
         <div id="loginButtons" class="button-group">
-            <md-button type="submit" class="md-primary md-raised" ng-click="loginButton()">Login</md-button>
+            <md-button type="submit" class="md-primary md-raised" ng-disabled="loginForm.$invalid" ng-click="loginButton()">Login</md-button>
             <md-button class="md-warn md-raised" ng-click="clearButton()">Clear</md-button>
         </div>
     </form>
