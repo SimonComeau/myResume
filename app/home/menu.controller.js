@@ -1,5 +1,5 @@
 //TODO: have order property for menuItems, with default values to organize order of lineup
-let menuController = function ($scope, $http, $state, loginService, $rootScope) {
+let menuController = function ($scope, $http, $state, authenticationService, $rootScope) {
     let thatDoNotRequireAuthentication = (state) => {
         let requiresAuthenticationIsDefined = typeof state.requiresAuthentication != "undefined";
         return requiresAuthenticationIsDefined && !state.requiresAuthentication;
@@ -17,7 +17,7 @@ let menuController = function ($scope, $http, $state, loginService, $rootScope) 
         $scope.menuItems = $state.get().filter(getAllMenuItems).filter(thatDoNotRequireAuthentication);
     };
     $scope.refreshMenu = () => {
-        loginService.isLoggedIn().then(buildMenuWithAllItems, buildMenuWithItemsThatDoNotRequireAuthentication);
+        authenticationService.isLoggedIn().then(buildMenuWithAllItems, buildMenuWithItemsThatDoNotRequireAuthentication);
     };
     $scope.updateActiveMenuItem = (event, state) => {
         $scope.currentNavItem = state.name;

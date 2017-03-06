@@ -43,14 +43,14 @@ angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
     };
     let loginState = {
         url: "/login",
-        templateUrl: "/app/authentication/authentication.html",
-        controller: "loginController",
+        templateUrl: "/app/authentication/login.html",
+        controller: "authenticationController",
         requiresAuthentication: false,
         menuItem: true
     };
     let logoutState = {
         url: "/logout",
-        controller: "loginController",
+        controller: "authenticationController",
         requiresAuthentication: true,
         menuItem: true
     };
@@ -63,7 +63,7 @@ angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
     $stateProvider.state("logout", logoutState);
     $urlRouterProvider.otherwise(handleDefaultState);
 });
-angular.module("simon").run(($rootScope, $state, loginService, $location) => {
+angular.module("simon").run(($rootScope, $state, authenticationService, $location) => {
     let displayToastForUnauthorizedAccess = (url) => {
         // TODO: toast for unauthorized access, plz login
     };
@@ -82,7 +82,7 @@ angular.module("simon").run(($rootScope, $state, loginService, $location) => {
             preventStateChangeAndRedirectToLogin();
         };
         $rootScope.$emit("UpdateActiveMenuItem", toState);
-        loginService.isLoggedIn().then(checkStateRequiresAuthentication, preventStateChangeAndRedirectToLogin);
+        authenticationService.isLoggedIn().then(checkStateRequiresAuthentication, preventStateChangeAndRedirectToLogin);
     };
     let handleStateChangeSuccess = (event, toState) => {
         $rootScope.$emit("UpdateActiveMenuItem", toState);

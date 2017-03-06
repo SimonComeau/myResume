@@ -12,7 +12,7 @@ var src = {
         "bower_components/angular-bootstrap/ui-bootstrap-csp.css",
         "bower_components/hover/css/hover.css",
         "bower_components/angular-material/angular-material.css",
-        "app/login/login.css",
+        "app/authentication/authentication.css",
         "app/contact/customContact.css"],
     js: ["bower_components/angular/angular.js",
         "bower_components/angular-ui-router/release/angular-ui-router.js",
@@ -26,11 +26,11 @@ var src = {
         "app/app.js",
         "app/config/stateConfig.js",
         "bower_components/js-scrypt/browser/scrypt.js",
-        "app/login/login.service.js",
+        "app/authentication/authentication.service.js",
         "app/home/menu.controller.js",
         "app/home/home.controller.js",
         "app/contact/contact.controller.js",
-        "app/login/login.controller.js",
+        "app/authentication/authentication.controller.js",
         "app/portfolio/portfolio.controller.js"]
 };
 var buildCss = function () {

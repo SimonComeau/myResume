@@ -1,11 +1,11 @@
 // TODO: rename to authController
 // TODO: logout needs a confirmation dialogue
 // TODO: toast for logout event
-let loginController = function ($scope, $http, $log, $state, loginService, $rootScope) {
+let authenticationController = function ($scope, $http, $log, $state, authenticationService, $rootScope) {
     $scope.user = {};
     $scope.loginButton = function () {
         if ($scope.loginForm.$valid) {
-            loginService.authenticateUser($scope.user.name, $scope.user.password);
+            authenticationService.authenticateUser($scope.user.name, $scope.user.password);
         }
     };
     $scope.clearButton = function () {
@@ -15,7 +15,7 @@ let loginController = function ($scope, $http, $log, $state, loginService, $root
         $scope.loginForm.$setUntouched();
     };
     if ($state.$current.name == "logout") {
-        loginService.logout();
+        authenticationService.logout();
     }
 };
-angular.module("simon").controller("loginController", loginController);
+angular.module("simon").controller("authenticationController", authenticationController);

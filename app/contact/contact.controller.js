@@ -22,10 +22,8 @@ let contactController = function ($scope, $http, $mdToast) {
         }
     };
     $scope.clearButton = () => {
-        $scope.contact = {};
+        setFormToUntouchedAndGreyOutSubmitBtn();
         $scope.contactForm.$submitted = false;
-        $scope.contactForm.$setPristine();
-        $scope.contactForm.$setUntouched();
     };
 };
 angular.module("simon").controller("contactController", contactController);
