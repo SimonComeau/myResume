@@ -1,7 +1,4 @@
-// TODO: rename to authController
-// TODO: logout needs a confirmation dialogue
-// TODO: toast for logout event
-let authenticationController = function ($scope, $http, $log, $state, authenticationService, $rootScope) {
+let authenticationController = function ($scope, $http, $log, $state, authenticationService) {
     $scope.user = {};
     $scope.loginButton = function () {
         if ($scope.loginForm.$valid) {
