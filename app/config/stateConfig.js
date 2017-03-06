@@ -68,6 +68,12 @@ angular.module("simon").run(($rootScope, $state, authenticationService, $locatio
         // TODO: toast for unauthorized access, plz login
     };
     let handlesStateChangeStart = (event, toState) => {
+        if (toState.name == "logout") {
+            let ok = true; // TODO: logout needs a confirmation dialogue
+            if (!ok) {
+                event.preventDefault();
+            }
+        }
         let preventStateChangeAndRedirectToLogin = () => {
             event.preventDefault();
             $state.go("login");
