@@ -1,8 +1,8 @@
-let authenticationController = function ($scope, $http, $log, $state, authenticationService) {
+let authenticationController = function ($scope, $http, $state, authenticationService, $stateParams) {
     $scope.user = {};
     $scope.loginButton = function () {
         if ($scope.loginForm.$valid) {
-            authenticationService.authenticateUser($scope.user.name, $scope.user.password);
+            authenticationService.authenticateUser($scope.user.name, $scope.user.password, $stateParams.redirectState);
         }
     };
     $scope.clearButton = function () {
