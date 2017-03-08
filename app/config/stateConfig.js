@@ -3,7 +3,6 @@ angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
         // TODO: toast for otherwise, url not found
     };
     let handleDefaultState = ($injector, $location) => {
-        console.log("hds", $location.absUrl());
         let $state = $injector.get("$state");
         $state.go("home");
         displayUrlNotFoundToast($location.absUrl());
@@ -13,46 +12,55 @@ angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
         templateUrl: "/app/home/home.html",
         controller: "homeController",
         requiresAuthentication: false,
-        menuItem: true
+        menuItem: true,
+        order: 0
     };
     let portfolioState = {
         url: "/portfolio",
         templateUrl: "/app/portfolio/portfolio.html",
         controller: "portfolioController",
         requiresAuthentication: false,
-        // menuItem:true
+        // menuItem:true,
+        order: 20
     };
     let contactState = {
         url: "/contact",
         templateUrl: "/app/contact/contact.html",
         controller: "contactController",
         requiresAuthentication: false,
-        menuItem: true
+        menuItem: true,
+        order: 30
     };
     let messagesState = {
         url: "/contact/messages",
         templateUrl: "/app/contact/messageList.html",
         controller: "contactController",
+        requiresAuthentication: true,
         menuItem: true,
-        requiresAuthentication: true
+        order: 40
+
     };
     let messageDetailsState = {
         templateUrl: "/app/contact/messageDetails.html",
         controller: "contactController",
-        requiresAuthentication: true
+        requiresAuthentication: true,
+        order: 50
     };
     let loginState = {
         url: "/login",
         templateUrl: "/app/authentication/login.html",
         controller: "authenticationController",
         requiresAuthentication: false,
-        menuItem: true
+        menuItem: true,
+        params: {redirectState: "home"},
+        order: 260
     };
     let logoutState = {
         url: "/logout",
         controller: "authenticationController",
         requiresAuthentication: true,
-        menuItem: true
+        menuItem: true,
+        order: 270
     };
     $stateProvider.state("home", homeState);
     $stateProvider.state("portfolio", portfolioState);
@@ -69,14 +77,14 @@ angular.module("simon").run(($rootScope, $state, authenticationService, $locatio
     };
     let handlesStateChangeStart = (event, toState) => {
         if (toState.name == "logout") {
-            let ok = true; // TODO: logout needs a confirmation dialogue
+            let ok = true; // TODO: logout needs a confirmation dialogue, instead of = true
             if (!ok) {
                 event.preventDefault();
             }
         }
         let preventStateChangeAndRedirectToLogin = () => {
             event.preventDefault();
-            $state.go("login");
+            $state.go("login", {redirectState: toState.name});
             displayToastForUnauthorizedAccess($location.absUrl());
         };
         let checkStateRequiresAuthentication = (response) => {
