@@ -1,80 +1,34 @@
-﻿using System;
-using System.Configuration;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Net;
 using System.Web.Http;
+using myResumeAPI.Services;
 
-namespace myResumeAPI.Controllers
-{
-    public class AuthenticationController : ApiController
-    {
-        [HttpPost]
-        [Route("api/authentication/login/{sessionId}")]
-        public IHttpActionResult Login([FromBody] dynamic user, int sessionId)
-        {
-            var userName = ConfigurationManager.AppSettings.Get("AdminUsername");
-            var password = ConfigurationManager.AppSettings.Get("AdminPassword");
-            var hasher = SHA512.Create();
-            var userSalt = Encoding.UTF8.GetBytes(userName + RetreiveAuthToken(sessionId));
-            var passwordSalt = Encoding.UTF8.GetBytes(password + RetreiveAuthToken(sessionId));
-            var expectedUsername = BitConverter.ToString(hasher.ComputeHash(userSalt)).Replace("-", "").ToLower();
-            var expectedPassword = BitConverter.ToString(hasher.ComputeHash(passwordSalt)).Replace("-", "").ToLower();
-            if (user.username.ToString() == expectedUsername && user.password.ToString() == expectedPassword)
-            {
-                AuthenticationService.Instance.SessionLookUp[sessionId].IsLoggedIn = true;
-                return Ok();
-            }
-            throw new HttpResponseException(HttpStatusCode.Unauthorized);
-        }
+namespace myResumeAPI.Controllers {
+	public class AuthenticationController : ApiController {
+		AuthenticationService AuthenticationService { get; } = AuthenticationService.Instance;
 
-        [HttpGet]
-        [Route("api/authentication/isloggedin/{sessionId}")]
-        public IHttpActionResult IsLoggedIn(int sessionId)
-        {
-            if (AuthenticationService.Instance.SessionLookUp.ContainsKey(sessionId))
-            {
-                var session = AuthenticationService.Instance.SessionLookUp[sessionId];
-                return Ok(session.IsLoggedIn);
-            }
-            return Ok(false);
-        }
+		[HttpPost]
+		[Route("api/authentication/login/{sessionId}")]
+		public IHttpActionResult Login([FromBody] dynamic user, int sessionId) {
+			if (!AuthenticationService.ValidateLoginCredentials(user, sessionId)) {
+				throw new HttpResponseException(HttpStatusCode.Unauthorized);
+			}
+			AuthenticationService.LoginSession(sessionId);
+			return Ok();
+		}
 
-        [HttpPost]
-        [Route("api/authentication/logout/{sessionId}")]
-        public IHttpActionResult Logout(int sessionId)
-        {
-            if (AuthenticationService.Instance.SessionLookUp.ContainsKey(sessionId))
-            {
-                AuthenticationService.Instance.SessionLookUp[sessionId].IsLoggedIn = false;
-            }
-            return Ok();
-        }
+		[HttpPost]
+		[Route("api/authentication/logout/{sessionId}")]
+		public IHttpActionResult Logout(int sessionId) {
+			AuthenticationService.LogoutSession(sessionId);
+			return Ok();
+		}
 
-        [HttpGet]
-        [Route("api/authentication/getauthtoken/{sessionId}")]
-        public IHttpActionResult GetAuthToken(int sessionId)
-        {
-            var guid = RetreiveAuthToken(sessionId);
-            return Ok(guid.ToString());
-        }
+		[HttpGet]
+		[Route("api/authentication/isloggedin/{sessionId}")]
+		public IHttpActionResult IsLoggedIn(int sessionId) => Ok(AuthenticationService.CheckSessionIsLoggedIn(sessionId));
 
-        private Guid RetreiveAuthToken(int sessionId)
-        {
-            if (AuthenticationService.Instance.SessionLookUp.ContainsKey(sessionId))
-            {
-                var session = AuthenticationService.Instance.SessionLookUp[sessionId];
-                return session.AuthToken;
-            }
-            var guid = Guid.NewGuid();
-            var newSession = new Session
-            {
-                IsLoggedIn = false,
-                AuthToken = guid,
-                Id = sessionId
-            };
-            AuthenticationService.Instance.SessionLookUp.Add(sessionId, newSession);
-            return guid;
-        }
-    }
+		[HttpGet]
+		[Route("api/authentication/getauthtoken/{sessionId}")]
+		public IHttpActionResult GetAuthToken(int sessionId) => Ok(AuthenticationService.GetAuthToken(sessionId));
+	}
 }
