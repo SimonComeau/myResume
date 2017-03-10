@@ -1,4 +1,3 @@
-// TODO: redirect toState if state is invalid instead of just home screen
 let authenticationService = function ($http, $rootScope, $state) {
     let authentication = {};
     authentication.getSessionId = () => {
@@ -14,21 +13,21 @@ let authenticationService = function ($http, $rootScope, $state) {
     let logoutUrl = "/api/authentication/logout/" + authentication.getSessionId();
     let isLoggedInUrl = "/api/authentication/isloggedin/" + authentication.getSessionId();
     let getAuthTokenUrl = "/api/authentication/getauthtoken/" + authentication.getSessionId();
-    authentication.goHomeAfterLoginStateChange = () => {
+    authentication.goHomeAfterLoginStateChange = (redirectState) => {
         $rootScope.$emit("RefreshMenu");
-        $state.go("home");
+        $state.go(redirectState);
         //TODO: toast for login state change
     };
     authentication.refreshMenuAfterLoginFailure = () => {
         $rootScope.$emit("RefreshMenu");
         //TODO: toast saying login failed
     };
-    authentication.authenticateUser = (username, password) => {
+    authentication.authenticateUser = (username, password, redirectState) => {
         let hashedUsername = sha512(username + authentication.authToken);
         let hashedPassword = sha512(password + authentication.authToken);
         let user = {username: hashedUsername, password: hashedPassword};
 
-        return $http.post(loginUrl, user).then(authentication.goHomeAfterLoginStateChange, authentication.refreshMenuAfterLoginFailure);
+        return $http.post(loginUrl, user).then(() => authentication.goHomeAfterLoginStateChange(redirectState), authentication.refreshMenuAfterLoginFailure);
     };
     authentication.setAuthToken = (response) => {
         authentication.authToken = response.data;
@@ -36,7 +35,7 @@ let authenticationService = function ($http, $rootScope, $state) {
     $http.get(getAuthTokenUrl).then(authentication.setAuthToken);
     authentication.isLoggedIn = () => $http.get(isLoggedInUrl);
     authentication.logout = () => {
-        $http.post(logoutUrl).then(authentication.goHomeAfterLoginStateChange);
+        $http.post(logoutUrl).then(() => authentication.goHomeAfterLoginStateChange("home"));
         // TODO: toast for logout event
     };
     return authentication;

@@ -41,6 +41,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <IncludeIisSettings>true</IncludeIisSettings>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -227,33 +228,44 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="app\app.js" />
+    <Content Include="app\authentication\authentication.controller.js" />
+    <Content Include="app\authentication\authentication.css" />
+    <Content Include="app\authentication\authentication.service.js" />
+    <Content Include="app\authentication\login.html" />
+    <Content Include="app\config\stateConfig.js" />
+    <Content Include="app\contact\contact.controller.js" />
+    <Content Include="app\contact\contact.html" />
+    <Content Include="app\contact\customContact.css" />
+    <Content Include="app\contact\messageDetails.html" />
+    <Content Include="app\contact\messageList.html" />
+    <Content Include="app\content\programPics\dunDefSetCalcToolCode-720.png" />
+    <Content Include="app\content\programPics\dunDefSetCalcToolCode.png" />
+    <Content Include="app\content\programPics\dunDefSetCalcToolUi.png" />
+    <Content Include="app\content\websitePics\religionCares.jpg" />
+    <Content Include="app\content\websitePics\religionCares.png" />
+    <Content Include="app\content\websitePics\religionCaresCode.png" />
+    <Content Include="app\home\home.controller.js" />
+    <Content Include="app\home\home.html" />
+    <Content Include="app\home\menu.controller.js" />
+    <Content Include="app\logos\g-plus-logo.png" />
+    <Content Include="app\logos\linkedin-logo-3.png" />
+    <Content Include="app\portfolio\portfolio.controller.js" />
+    <Content Include="app\portfolio\portfolio.html" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="Settings\1and1.settings.config" />
     <Content Include="Settings\1and1.connection.config" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="README.md" />
     <None Include="Properties\PublishProfiles\1and1.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
-    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.1.1.js" />
-    <Content Include="Scripts\jquery-3.1.1.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
-    <Content Include="Scripts\respond.min.js" />
+    <Content Include="siteFiles\all.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="siteFiles\all.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -261,24 +273,15 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="api\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Settings\ApiClassDiagram.cd" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Project_Readme.html" />
     <Content Include="Settings\SecretSettings.config" />
     <Content Include="Settings\SecretConnection.config">
