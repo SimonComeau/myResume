@@ -84,11 +84,7 @@ angular.module("simon").run(($rootScope, $state, authenticationService, $locatio
                 .ok("Yes")
                 .cancel("Cancel");
 
-            $mdDialog.show(confirm).then(function () {
-                authenticationService.logout();
-            }, function () {
-                event.preventDefault();
-            });
+            $mdDialog.show(confirm).then(authenticationService.logout(), event.preventDefault());
             // let ok = true; // TODO: logout needs a confirmation dialogue, instead of = true
             // if (!ok) {
             //     event.preventDefault();
