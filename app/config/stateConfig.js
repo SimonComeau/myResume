@@ -80,10 +80,9 @@ angular.module("simon").run(($rootScope, $state, authenticationService, $locatio
             let confirm = $mdDialog.confirm()
                 .title("Logout confirmation")
                 .content("Are you sure you want to logout?")
-                .ariaLabel('Lucky day')
                 .ok("Yes")
                 .cancel("Cancel");
-            $mdDialog.show(confirm).then(authenticationService.logout, event.preventDefault());
+            $mdDialog.show(confirm).then(authenticationService.logout, event.preventDefault);
         }
         let preventStateChangeAndRedirectToLogin = () => {
             event.preventDefault();
@@ -102,7 +101,6 @@ angular.module("simon").run(($rootScope, $state, authenticationService, $locatio
         authenticationService.isLoggedIn().then(checkStateRequiresAuthentication, preventStateChangeAndRedirectToLogin);
     };
     let handleStateChangeSuccess = (event, toState) => {
-        console.log(toState);
         $rootScope.$emit("UpdateActiveMenuItem", toState);
     };
     $rootScope.$on("$stateChangeStart", handlesStateChangeStart);

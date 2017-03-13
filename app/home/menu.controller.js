@@ -31,7 +31,6 @@ let menuController = function ($scope, $http, $state, authenticationService, $ro
     };
     $scope.refreshMenu = () => authenticationService.isLoggedIn().then((response) => buildMenu(response.data), () => buildMenu(false));
     $scope.updateActiveMenuItem = (event, state) => {$scope.currentNavItem = state.name;
-        console.log($scope.currentNavItem, state.name, state);
     };
     $scope.refreshMenu();
     $rootScope.$on("RefreshMenu", $scope.refreshMenu);
