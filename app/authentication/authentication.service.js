@@ -13,9 +13,12 @@ let authenticationService = function ($http, $rootScope, $state) {
     let logoutUrl = "/api/authentication/logout/" + authentication.getSessionId();
     let isLoggedInUrl = "/api/authentication/isloggedin/" + authentication.getSessionId();
     let getAuthTokenUrl = "/api/authentication/getauthtoken/" + authentication.getSessionId();
-    authentication.goHomeAfterLoginStateChange = (redirectState) => {
+    authentication.redirectAfterLoginStateChange = (redirectStateName) => {
         $rootScope.$emit("RefreshMenu");
-        $state.go(redirectState);
+        if ($state.$current.name == redirectStateName) {
+            $rootScope.$emit("UpdateActiveMenuItem", $state.$current);
+        }
+        $state.go(redirectStateName);
         //TODO: toast for login state change
     };
     authentication.refreshMenuAfterLoginFailure = () => {
@@ -27,7 +30,7 @@ let authenticationService = function ($http, $rootScope, $state) {
         let hashedPassword = sha512(password + authentication.authToken);
         let user = {username: hashedUsername, password: hashedPassword};
 
-        return $http.post(loginUrl, user).then(() => authentication.goHomeAfterLoginStateChange(redirectState), authentication.refreshMenuAfterLoginFailure);
+        return $http.post(loginUrl, user).then(() => authentication.redirectAfterLoginStateChange(redirectState), authentication.refreshMenuAfterLoginFailure);
     };
     authentication.setAuthToken = (response) => {
         authentication.authToken = response.data;
@@ -35,7 +38,7 @@ let authenticationService = function ($http, $rootScope, $state) {
     $http.get(getAuthTokenUrl).then(authentication.setAuthToken);
     authentication.isLoggedIn = () => $http.get(isLoggedInUrl);
     authentication.logout = () => {
-        $http.post(logoutUrl).then(() => authentication.goHomeAfterLoginStateChange("home"));
+        $http.post(logoutUrl).then(() => authentication.redirectAfterLoginStateChange("home"));
         // TODO: toast for logout event
     };
     return authentication;
