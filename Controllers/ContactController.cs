@@ -1,40 +1,31 @@
-﻿using System;
-using System.Net.Mail;
-using System.Web.Http;
-using myResumeAPI.Database;
-using myResumeAPI.MailClients;
+﻿using System.Web.Http;
+using myResumeAPI.Factory;
+using myResumeAPI.Interfaces;
 using myResumeAPI.Models;
+using myResumeAPI.Services;
+using Microsoft.Practices.Unity;
 
 namespace myResumeAPI.Controllers {
 	public class ContactController : ApiController {
+		public ContactController() {
+			MailClient = UnityService.Instance.Container.Resolve<IResumeMailClient>();
+			DbContext = UnityService.Instance.Container.Resolve<IResumeDbContext>();
+		}
+
 		[HttpPost]
 		[Route("api/contact")]
 		public void Post([FromBody] Contact contact) {
-			var mailClient = new OneAndOneSmtpClient();
-			var message = GetMailMessageFromContact(contact);
-			mailClient.Send(message);
-			using (var db = new SimonDbContext()) {
-				db.Contacts.Add(contact);
-				db.SaveChanges();
-			}
+			MailClient.SendMessage(MailMessageFactory<Contact>.Create(contact));
+			DbContext.Add(contact);
 		}
+
+		IResumeMailClient MailClient { get; }
+		IResumeDbContext DbContext { get; }
 
 		//[HttpGet]
 		//public IHttpActionResult Get()
 		//{
 		//    return Ok("piggy oink oink");
 		//}
-
-		static MailMessage GetMailMessageFromContact(Contact contact) {
-			var fromAddress = new MailAddress(contact.Email);
-			var message = new MailMessage {
-				From = fromAddress,
-				Subject = $"Contact {contact.Name} has sent you a new message.",
-				Body = $"{contact.Message}{Environment.NewLine}{contact.PhoneNumber}"
-			};
-			message.To.Add("nomismoc@gmail.com");
-			message.To.Add("contact@simoncomeau.com");
-			return message;
-		}
 	}
 }

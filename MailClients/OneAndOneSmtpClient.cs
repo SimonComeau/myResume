@@ -1,9 +1,10 @@
 using System.Configuration;
 using System.Net;
 using System.Net.Mail;
+using myResumeAPI.Interfaces;
 
 namespace myResumeAPI.MailClients {
-	public class OneAndOneSmtpClient : SmtpClient {
+	public class OneAndOneSmtpClient : SmtpClient, IResumeMailClient {
 		public OneAndOneSmtpClient() {
 			Port = 587;
 			EnableSsl = true;
@@ -11,10 +12,12 @@ namespace myResumeAPI.MailClients {
 			Credentials = GetNetworkCredential();
 		}
 
-		public NetworkCredential GetNetworkCredential() {
+		NetworkCredential GetNetworkCredential() {
 			var userName = ConfigurationManager.AppSettings.Get("SmtpUserName");
 			var password = ConfigurationManager.AppSettings.Get("SmtpPassword");
 			return new NetworkCredential(userName, password);
 		}
+
+		public void SendMessage(MailMessage message) => Send(message);
 	}
 }
