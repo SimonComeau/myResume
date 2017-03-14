@@ -1,25 +1,29 @@
 ﻿using System.Configuration;
 using System.Data.Entity;
+using myResumeAPI.Interfaces;
 using myResumeAPI.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Configuration = myResumeAPI.Migrations.Configuration;
 
-namespace myResumeAPI.Database
-{
-    public class SimonDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public DbSet<Contact> Contacts { get; set; }
+namespace myResumeAPI.Database {
+	public class SimonDbContext : IdentityDbContext<ApplicationUser>, IResumeDbContext {
+		// ReSharper disable once MemberCanBePrivate.Global
+		// This can NEVER be made private
+		public DbSet<Contact> Contacts { get; set; }
 
-        public SimonDbContext()
-        {
-            Database.Connection.ConnectionString = ConfigurationManager.ConnectionStrings["SimonDbContext"].ConnectionString;
-            Database.CreateIfNotExists();
-        }
+		public SimonDbContext() {
+			Database.Connection.ConnectionString = ConfigurationManager.ConnectionStrings["SimonDbContext"].ConnectionString;
+			Database.CreateIfNotExists();
+		}
 
-        public static SimonDbContext Create()
-        {
-            System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<SimonDbContext, Configuration>());
-            return new SimonDbContext();
-        }
-    }
+		public static SimonDbContext Create() {
+			System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<SimonDbContext, Configuration>());
+			return new SimonDbContext();
+		}
+
+		public void Add(Contact contact) {
+			Contacts.Add(contact);
+			SaveChanges();
+		}
+	}
 }
