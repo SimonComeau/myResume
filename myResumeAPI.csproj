@@ -218,7 +218,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\MailMessageFactory.cs" />
+    <Compile Include="Factory\MailMessageFactory.cs" />
     <Compile Include="Interfaces\IResumeDbContext.cs" />
     <Compile Include="Interfaces\IResumeMailClient.cs" />
     <Compile Include="Models\ChangePasswordBindingModel.cs" />
