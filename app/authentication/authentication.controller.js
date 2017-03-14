@@ -11,8 +11,5 @@ let authenticationController = function ($scope, $http, $state, authenticationSe
         $scope.loginForm.$setPristine();
         $scope.loginForm.$setUntouched();
     };
-    if ($state.$current.name == "logout") {
-        authenticationService.logout();
-    }
 };
 angular.module("simon").controller("authenticationController", authenticationController);

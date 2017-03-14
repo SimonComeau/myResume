@@ -71,16 +71,18 @@ angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
     $stateProvider.state("logout", logoutState);
     $urlRouterProvider.otherwise(handleDefaultState);
 });
-angular.module("simon").run(($rootScope, $state, authenticationService, $location) => {
+angular.module("simon").run(($rootScope, $state, authenticationService, $location, $mdDialog) => {
     let displayToastForUnauthorizedAccess = (url) => {
         // TODO: toast for unauthorized access, plz login
     };
     let handlesStateChangeStart = (event, toState) => {
         if (toState.name == "logout") {
-            let ok = true; // TODO: logout needs a confirmation dialogue, instead of = true
-            if (!ok) {
-                event.preventDefault();
-            }
+            let confirm = $mdDialog.confirm()
+                .title("Logout confirmation")
+                .content("Are you sure you want to logout?")
+                .ok("Yes")
+                .cancel("Cancel");
+            $mdDialog.show(confirm).then(authenticationService.logout, event.preventDefault);
         }
         let preventStateChangeAndRedirectToLogin = () => {
             event.preventDefault();
