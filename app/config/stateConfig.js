@@ -1,5 +1,7 @@
 angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
-    let displayUrlNotFoundToast = (url) => {
+    let displayUrlNotFoundToast = (url, $injector) => {
+        let $mdToast = $injector.get("$mdToast");
+        $mdToast.show($mdToast.simple().textContent("This URL: " + url + " is invalid, redirecting to Home."));
         // TODO: toast for otherwise, url not found
     };
     let handleDefaultState = ($injector, $location) => {
@@ -38,7 +40,6 @@ angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
         requiresAuthentication: true,
         menuItem: true,
         order: 40
-
     };
     let messageDetailsState = {
         templateUrl: "/app/contact/messageDetails.html",
@@ -71,9 +72,9 @@ angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
     $stateProvider.state("logout", logoutState);
     $urlRouterProvider.otherwise(handleDefaultState);
 });
-angular.module("simon").run(($rootScope, $state, authenticationService, $location, $mdDialog) => {
+angular.module("simon").run(($rootScope, $state, authenticationService, $location, $mdToast ,$mdDialog) => {
     let displayToastForUnauthorizedAccess = (url) => {
-        // TODO: toast for unauthorized access, plz login
+        $mdToast.show($mdToast.simple().textContent("This URL: " + url + "requires authentication. Please login to continue."));
     };
     let handlesStateChangeStart = (event, toState) => {
         if (toState.name == "logout") {
