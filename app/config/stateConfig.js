@@ -1,7 +1,5 @@
 angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
-    let displayUrlNotFoundToast = (url, $injector) => {
-        let $mdToast = $injector.get("$mdToast");
-        $mdToast.show($mdToast.simple().textContent("This URL: " + url + " is invalid, redirecting to Home."));
+    let displayUrlNotFoundToast = (url) => {
         // TODO: toast for otherwise, url not found
     };
     let handleDefaultState = ($injector, $location) => {

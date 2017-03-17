@@ -1,4 +1,4 @@
-let authenticationService = function ($http, $rootScope, $state) {
+let authenticationService = function ($http, $rootScope, $state, $mdToast) {
     let authentication = {};
     authentication.getSessionId = () => {
         if (sessionStorage.getItem("sessionId")) {
@@ -19,18 +19,22 @@ let authenticationService = function ($http, $rootScope, $state) {
             $rootScope.$emit("UpdateActiveMenuItem", $state.$current);
         }
         $state.go(redirectStateName);
-        //TODO: toast for login state change
     };
     authentication.refreshMenuAfterLoginFailure = () => {
         $rootScope.$emit("RefreshMenu");
-        //TODO: toast saying login failed
     };
     authentication.authenticateUser = (username, password, redirectState) => {
         let hashedUsername = sha512(username + authentication.authToken);
         let hashedPassword = sha512(password + authentication.authToken);
         let user = {username: hashedUsername, password: hashedPassword};
 
-        return $http.post(loginUrl, user).then(() => authentication.redirectAfterLoginStateChange(redirectState), authentication.refreshMenuAfterLoginFailure);
+        return $http.post(loginUrl, user).then(function(){
+            authentication.redirectAfterLoginStateChange(redirectState);
+            $mdToast.show($mdToast.simple().textContent("Login successful."));
+        }, function (){
+            authentication.refreshMenuAfterLoginFailure;
+            $mdToast.show($mdToast.simple().textContent("Login failed."));
+        });
     };
     authentication.setAuthToken = (response) => {
         authentication.authToken = response.data;
@@ -39,7 +43,7 @@ let authenticationService = function ($http, $rootScope, $state) {
     authentication.isLoggedIn = () => $http.get(isLoggedInUrl);
     authentication.logout = () => {
         $http.post(logoutUrl).then(() => authentication.redirectAfterLoginStateChange("home"));
-        // TODO: toast for logout event
+        $mdToast.show($mdToast.simple().textContent("Logout successful."));
     };
     return authentication;
 };
