@@ -1,11 +1,9 @@
 angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
-    let displayUrlNotFoundToast = (url) => {
-        // TODO: toast for otherwise, url not found
-    };
     let handleDefaultState = ($injector, $location) => {
         let $state = $injector.get("$state");
+        let $rootScope = $injector.get("$rootScope");
         $state.go("home");
-        displayUrlNotFoundToast($location.absUrl());
+        $rootScope.emit("displayUrlNotFound", $location.absUrl());
     };
     let homeState = {
         url: "/",
@@ -38,7 +36,6 @@ angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
         requiresAuthentication: true,
         menuItem: true,
         order: 40
-
     };
     let messageDetailsState = {
         templateUrl: "/app/contact/messageDetails.html",
@@ -70,39 +67,4 @@ angular.module("simon").config(($stateProvider, $urlRouterProvider) => {
     $stateProvider.state("login", loginState);
     $stateProvider.state("logout", logoutState);
     $urlRouterProvider.otherwise(handleDefaultState);
-});
-angular.module("simon").run(($rootScope, $state, authenticationService, $location, $mdDialog) => {
-    let displayToastForUnauthorizedAccess = (url) => {
-        // TODO: toast for unauthorized access, plz login
-    };
-    let handlesStateChangeStart = (event, toState) => {
-        if (toState.name == "logout") {
-            let confirm = $mdDialog.confirm()
-                .title("Logout confirmation")
-                .content("Are you sure you want to logout?")
-                .ok("Yes")
-                .cancel("Cancel");
-            $mdDialog.show(confirm).then(authenticationService.logout, event.preventDefault);
-        }
-        let preventStateChangeAndRedirectToLogin = () => {
-            event.preventDefault();
-            $state.go("login", {redirectState: toState.name});
-            displayToastForUnauthorizedAccess($location.absUrl());
-        };
-        let checkStateRequiresAuthentication = (response) => {
-            let isLoggedIn = response.data;
-            let requiresAuthenticationDefined = typeof toState.requiresAuthentication != "undefined";
-            let stateDoesNotRequireAuthentication = requiresAuthenticationDefined && !toState.requiresAuthentication;
-            if (stateDoesNotRequireAuthentication || isLoggedIn)
-                return;
-            preventStateChangeAndRedirectToLogin();
-        };
-        $rootScope.$emit("UpdateActiveMenuItem", toState);
-        authenticationService.isLoggedIn().then(checkStateRequiresAuthentication, preventStateChangeAndRedirectToLogin);
-    };
-    let handleStateChangeSuccess = (event, toState) => {
-        $rootScope.$emit("UpdateActiveMenuItem", toState);
-    };
-    $rootScope.$on("$stateChangeStart", handlesStateChangeStart);
-    $rootScope.$on("$stateChangeSuccess", handleStateChangeSuccess);
 });
