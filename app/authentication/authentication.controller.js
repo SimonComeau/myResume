@@ -1,15 +1,23 @@
-let authenticationController = function ($scope, $http, $state, authenticationService, $stateParams) {
-    $scope.user = {};
-    $scope.loginButton = function () {
-        if ($scope.loginForm.$valid) {
-            authenticationService.authenticateUser($scope.user.name, $scope.user.password, $stateParams.redirectState);
+class AuthenticationController {
+    constructor($http, $state, authenticationService, $stateParams) {
+        this.$http = $http;
+        this.$state = $state;
+        this.authenticationService = authenticationService;
+        this.$stateParams = $stateParams;
+        this.user = {};
+    }
+
+    loginButton() {
+        if (this.form.$valid) {
+            this.authenticationService.authenticateUser(this.user.name, this.user.password, this.$stateParams.redirectState);
         }
     };
-    $scope.clearButton = function () {
-        $scope.user = {};
-        $scope.loginForm.$submitted = false;
-        $scope.loginForm.$setPristine();
-        $scope.loginForm.$setUntouched();
-    };
-};
-angular.module("simon").controller("authenticationController", authenticationController);
+
+    clearButton() {
+        this.user = {};
+        this.form.$submitted = false;
+        this.form.$setPristine();
+        this.form.$setUntouched();
+    }
+}
+angular.module("simon").controller("authenticationController", AuthenticationController);

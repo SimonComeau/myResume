@@ -1,2 +1,4 @@
-let homeController = function ($scope, $http) {};
-angular.module("simon").controller("homeController", homeController);
+class HomeController {
+}
+
+angular.module("simon").controller("homeController", HomeController);
