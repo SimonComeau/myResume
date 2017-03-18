@@ -1,5 +1,20 @@
-let authenticationService = function ($http, $rootScope, $state, $mdToast) {
-    this.getSessionId = () => {
+class AuthenticationService {
+    constructor($http, $rootScope, $state, $mdToast) {
+        let setAuthToken = (response) => {
+            this.authToken = response.data;
+        };
+        this.$http = $http;
+        this.$rootScope = $rootScope;
+        this.$state = $state;
+        this.$mdToast = $mdToast;
+        this.loginUrl = `/api/authentication/login/${ this.getSessionId() }`;
+        this.logoutUrl = `/api/authentication/logout/${ this.getSessionId() }`;
+        this.isLoggedInUrl = `/api/authentication/isloggedin/${ this.getSessionId() }`;
+        this.getAuthTokenUrl = `api/authentication/getauthtoken/${ this.getSessionId() }`;
+        this.$http.get(this.getAuthTokenUrl).then(setAuthToken);
+    }
+
+    getSessionId() {
         if (sessionStorage.getItem("sessionId")) {
             return sessionStorage.getItem("sessionId");
         }
@@ -7,42 +22,40 @@ let authenticationService = function ($http, $rootScope, $state, $mdToast) {
         sessionStorage.setItem("sessionId", sessionId);
         return sessionId;
     };
-    // TODO: use formatted strings template
-    let loginUrl = "/api/authentication/login/" + this.getSessionId();
-    let logoutUrl = "/api/authentication/logout/" + this.getSessionId();
-    let isLoggedInUrl = "/api/authentication/isloggedin/" + this.getSessionId();
-    let getAuthTokenUrl = "/api/authentication/getauthtoken/" + this.getSessionId();
-    this.redirectAfterLoginStateChange = (redirectStateName) => {
-        $rootScope.$emit("RefreshMenu");
-        if ($state.$current.name == redirectStateName) {
-            $rootScope.$emit("UpdateActiveMenuItem", $state.$current);
+
+    redirectAfterLoginStateChange(redirectStateName) {
+        this.$rootScope.$emit("RefreshMenu");
+        if (this.$state.$current.name == redirectStateName) {
+            this.$rootScope.$emit("UpdateActiveMenuItem", this.$state.$current);
         }
-        $state.go(redirectStateName);
+        this.$state.go(redirectStateName);
     };
-    this.refreshMenuAfterLoginFailure = () => {
-        $rootScope.$emit("RefreshMenu");
+
+    refreshMenuAfterLoginFailure() {
+        this.$rootScope.$emit("RefreshMenu");
     };
-    this.authenticateUser = (username, password, redirectState) => {
+
+    authenticateUser(username, password, redirectState) {
         let hashedUsername = sha512(username + this.authToken);
         let hashedPassword = sha512(password + this.authToken);
         let user = {username: hashedUsername, password: hashedPassword};
 
-        return $http.post(loginUrl, user).then(() => {
+        return this.$http.post(this.loginUrl, user).then(() => {
             this.redirectAfterLoginStateChange(redirectState);
-            $mdToast.show($mdToast.simple().textContent("Login successful."));
+            this.$mdToast.show(this.$mdToast.simple().textContent("Login successful."));
         }, () => {
             this.refreshMenuAfterLoginFailure();
-            $mdToast.show($mdToast.simple().textContent("Login failed."));
+            this.$mdToast.show(this.$mdToast.simple().textContent("Login failed."));
         });
     };
-    this.setAuthToken = (response) => {
-        this.authToken = response.data;
+
+    isLoggedIn() {
+        return this.$http.get(this.isLoggedInUrl);
     };
-    $http.get(getAuthTokenUrl).then(this.setAuthToken);
-    this.isLoggedIn = () => $http.get(isLoggedInUrl);
-    this.logout = () => {
-        $http.post(logoutUrl).then(() => this.redirectAfterLoginStateChange("home"));
-        $mdToast.show($mdToast.simple().textContent("Logout successful."));
+
+    logout() {
+        this.$http.post(this.logoutUrl).then(() => this.redirectAfterLoginStateChange("home"));
+        this.$mdToast.show(this.$mdToast.simple().textContent("Logout successful."));
     };
-};
-angular.module("simon").service("authenticationService", authenticationService);
+}
+angular.module("simon").service("authenticationService", AuthenticationService);

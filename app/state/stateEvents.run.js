@@ -13,7 +13,7 @@ angular.module("simon").run(($rootScope, $state, authenticationService, $locatio
                 .content("Are you sure you want to logout?")
                 .ok("Yes")
                 .cancel("Cancel");
-            $mdDialog.show(confirm).then(authenticationService.logout, event.preventDefault);
+            $mdDialog.show(confirm).then( () => {authenticationService.logout()}, event.preventDefault);
         }
         let preventStateChangeAndRedirectToLogin = () => {
             event.preventDefault();
