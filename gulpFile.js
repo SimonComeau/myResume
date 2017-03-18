@@ -10,7 +10,6 @@ var watch = require("gulp-watch");
 var src = {
     css: ["bower_components/bootstrap/dist/css/bootstrap.css",
         "bower_components/angular-bootstrap/ui-bootstrap-csp.css",
-        "bower_components/hover/css/hover.css",
         "bower_components/angular-material/angular-material.css",
         "app/authentication/authentication.css",
         "app/contact/customContact.css"],
@@ -26,7 +25,6 @@ var src = {
         "app/app.js",
         "app/state/state.config.js",
         "app/state/stateEvents.run.js",
-        "bower_components/js-scrypt/browser/scrypt.js",
         "app/authentication/authentication.service.js",
         "app/home/menu.controller.js",
         "app/home/home.controller.js",

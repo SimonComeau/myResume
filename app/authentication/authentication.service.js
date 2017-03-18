@@ -1,6 +1,5 @@
 let authenticationService = function ($http, $rootScope, $state, $mdToast) {
-    let authentication = {};
-    authentication.getSessionId = () => {
+    this.getSessionId = () => {
         if (sessionStorage.getItem("sessionId")) {
             return sessionStorage.getItem("sessionId");
         }
@@ -9,42 +8,41 @@ let authenticationService = function ($http, $rootScope, $state, $mdToast) {
         return sessionId;
     };
     // TODO: use formatted strings template
-    let loginUrl = "/api/authentication/login/" + authentication.getSessionId();
-    let logoutUrl = "/api/authentication/logout/" + authentication.getSessionId();
-    let isLoggedInUrl = "/api/authentication/isloggedin/" + authentication.getSessionId();
-    let getAuthTokenUrl = "/api/authentication/getauthtoken/" + authentication.getSessionId();
-    authentication.redirectAfterLoginStateChange = (redirectStateName) => {
+    let loginUrl = "/api/authentication/login/" + this.getSessionId();
+    let logoutUrl = "/api/authentication/logout/" + this.getSessionId();
+    let isLoggedInUrl = "/api/authentication/isloggedin/" + this.getSessionId();
+    let getAuthTokenUrl = "/api/authentication/getauthtoken/" + this.getSessionId();
+    this.redirectAfterLoginStateChange = (redirectStateName) => {
         $rootScope.$emit("RefreshMenu");
         if ($state.$current.name == redirectStateName) {
             $rootScope.$emit("UpdateActiveMenuItem", $state.$current);
         }
         $state.go(redirectStateName);
     };
-    authentication.refreshMenuAfterLoginFailure = () => {
+    this.refreshMenuAfterLoginFailure = () => {
         $rootScope.$emit("RefreshMenu");
     };
-    authentication.authenticateUser = (username, password, redirectState) => {
-        let hashedUsername = sha512(username + authentication.authToken);
-        let hashedPassword = sha512(password + authentication.authToken);
+    this.authenticateUser = (username, password, redirectState) => {
+        let hashedUsername = sha512(username + this.authToken);
+        let hashedPassword = sha512(password + this.authToken);
         let user = {username: hashedUsername, password: hashedPassword};
 
-        return $http.post(loginUrl, user).then(function(){
-            authentication.redirectAfterLoginStateChange(redirectState);
+        return $http.post(loginUrl, user).then(() => {
+            this.redirectAfterLoginStateChange(redirectState);
             $mdToast.show($mdToast.simple().textContent("Login successful."));
-        }, function (){
-            authentication.refreshMenuAfterLoginFailure;
+        }, () => {
+            this.refreshMenuAfterLoginFailure();
             $mdToast.show($mdToast.simple().textContent("Login failed."));
         });
     };
-    authentication.setAuthToken = (response) => {
-        authentication.authToken = response.data;
+    this.setAuthToken = (response) => {
+        this.authToken = response.data;
     };
-    $http.get(getAuthTokenUrl).then(authentication.setAuthToken);
-    authentication.isLoggedIn = () => $http.get(isLoggedInUrl);
-    authentication.logout = () => {
-        $http.post(logoutUrl).then(() => authentication.redirectAfterLoginStateChange("home"));
+    $http.get(getAuthTokenUrl).then(this.setAuthToken);
+    this.isLoggedIn = () => $http.get(isLoggedInUrl);
+    this.logout = () => {
+        $http.post(logoutUrl).then(() => this.redirectAfterLoginStateChange("home"));
         $mdToast.show($mdToast.simple().textContent("Logout successful."));
     };
-    return authentication;
 };
-angular.module("simon").factory("authenticationService", authenticationService);
+angular.module("simon").service("authenticationService", authenticationService);

@@ -1,4 +1,4 @@
-angular.module("simon").run(($rootScope, $state, authenticationService, $location, $mdToast ,$mdDialog) => {
+angular.module("simon").run(($rootScope, $state, authenticationService, $location, $mdToast , $mdDialog) => {
     let displayUrlNotFound = (url) => {
         $mdToast.show($mdToast.simple().textContent("This URL: " + url + " is not recognized, redirecting to Home."));
         // TODO: toast for otherwise, url not found
