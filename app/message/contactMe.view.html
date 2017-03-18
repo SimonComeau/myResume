@@ -1,4 +1,4 @@
-<div ng-controller="contactController" class="container-fluid formDisplay">
+<div ng-controller="messageController as message" class="container-fluid formDisplay">
     <div class="col-sm-4 left-pane">
         <div>
             <p>Please leave a message and I will get back to you as soon as possible. Thank you.</p>
@@ -14,36 +14,36 @@
                 <img src="/app/logos/g-plus-logo.png" style="height: 40px;"></a>
         </div>
     </div>
-    <form name="contactForm" class="col-sm-8 right-pane" novalidate>
+    <form name="message.form" class="col-sm-8 right-pane" novalidate>
         <md-input-container class="md-block customInputContainer">
             <label>Name:</label><br>
-            <input required name="contactName" ng-model="contact.name" type="text"/>
-            <div ng-messages="contactForm.contactName.$error"
-                 ng-show="checkForInvalid(contactForm.contactName)">
+            <input required name="contactName" ng-model="message.contact.name" type="text"/>
+            <div ng-messages="message.form.contactName.$error"
+                 ng-show="checkForInvalid(message.form.contactName)">
                 <div ng-message="required">This is required.</div>
             </div>
         </md-input-container>
         <md-input-container class="md-block customInputContainer">
             <label>Email:</label><br>
-            <input required name="contactEmail" ng-model="contact.email" type="text"/>
-            <div ng-messages="contactForm.contactEmail.$error"
-                 ng-show="checkForInvalid(contactForm.contactEmail)">
+            <input required name="contactEmail" ng-model="message.contact.email" type="text"/>
+            <div ng-messages="message.form.contactEmail.$error"
+                 ng-show="message.checkForInvalid(message.form.contactEmail)">
                 <div ng-message="required">This is required.</div>
             </div>
         </md-input-container>
         <md-input-container class="md-block customInputContainer">
             <label for="contactPhoneNumber">Phone number:</label><br>
-            <input id="contactPhoneNumber" ng-model="contact.phoneNumber" type="text"/>
+            <input id="contactPhoneNumber" ng-model="message.contact.phoneNumber" type="text"/>
         </md-input-container>
         <md-input-container class="md-block customInputContainerTextArea">
             <label for="contactMessage">Message:</label><br>
-            <textarea id="contactMessage" class="md-input" ng-model="contact.message"></textarea>
+            <textarea id="contactMessage" class="md-input" ng-model="message.contact.message"></textarea>
         </md-input-container>
         <div class="button-group">
-            <md-button type="submit" class="md-primary md-raised" ng-disabled="contactForm.$invalid"
-                       ng-click="sendButton()">Send
+            <md-button type="submit" class="md-primary md-raised" ng-disabled="message.form.$invalid"
+                       ng-click="message.sendButton()">Send
             </md-button>
-            <md-button class="md-warn md-raised" ng-click="clearButton()">Clear</md-button>
+            <md-button class="md-warn md-raised" ng-click="message.clearButton()">Clear</md-button>
         </div>
     </form>
 </div>

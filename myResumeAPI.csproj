@@ -258,7 +258,7 @@
     <Content Include="app\authentication\authentication.service.js" />
     <Content Include="app\authentication\login.html" />
     <Content Include="app\config\state.config.js" />
-    <Content Include="app\contact\contact.controller.js" />
+    <Content Include="app\contact\message.controller.js" />
     <Content Include="app\contact\contact.html" />
     <Content Include="app\contact\customContact.css" />
     <Content Include="app\contact\messageDetails.html" />

@@ -7,11 +7,23 @@ class AuthenticationService {
         this.$rootScope = $rootScope;
         this.$state = $state;
         this.$mdToast = $mdToast;
-        this.loginUrl = `/api/authentication/login/${ this.getSessionId() }`;
-        this.logoutUrl = `/api/authentication/logout/${ this.getSessionId() }`;
-        this.isLoggedInUrl = `/api/authentication/isloggedin/${ this.getSessionId() }`;
-        this.getAuthTokenUrl = `api/authentication/getauthtoken/${ this.getSessionId() }`;
         this.$http.get(this.getAuthTokenUrl).then(setAuthToken);
+    }
+
+    get loginUrl() {
+        return `/api/authentication/login/${ this.getSessionId() }`;
+    }
+
+    get logoutUrl() {
+        return `/api/authentication/logout/${ this.getSessionId() }`;
+    }
+
+    get isLoggedInUrl() {
+        return `/api/authentication/isloggedin/${ this.getSessionId() }`;
+    }
+
+    get getAuthTokenUrl() {
+        return `api/authentication/getauthtoken/${ this.getSessionId() }`;
     }
 
     getSessionId() {

@@ -1,0 +1,26 @@
+<div ng-controller="authenticationController as auth" class="container-fluid formDisplay">
+    <form name="auth.form" class="col-sm-12" novalidate>
+        <md-input-container class="md-block customInputContainer">
+            <label>Username:</label><br>
+            <input required name="userName" ng-model="auth.user.name" type="text"/>
+            <div ng-messages="auth.form.userName.$error"
+                 ng-show="(form.$submitted || auth.form.userName.$touched) && auth.form.userName.$invalid ">
+                <div ng-message="required">This is required.</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block customInputContainer">
+            <label>Password:</label><br>
+            <input required name="userPassword" ng-model="auth.user.password" type="password"/>
+            <div ng-messages="auth.form.userPassword.$error"
+                 ng-show="(auth.form.$submitted || auth.form.userPassword.$touched) && auth.form.userPassword.$invalid">
+                <div ng-message="required">This is required.</div>
+            </div>
+        </md-input-container>
+        <div id="loginButtons" class="button-group">
+            <md-button type="submit" class="md-primary md-raised" ng-disabled="auth.form.$invalid"
+                       ng-click="auth.loginButton()">Login
+            </md-button>
+            <md-button class="md-warn md-raised" ng-click="auth.clearButton()">Clear</md-button>
+        </div>
+    </form>
+</div>

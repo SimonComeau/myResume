@@ -1,11 +1,28 @@
-let menuController = function ($scope, $http, $state, authenticationService, $rootScope) {
-    let thatDoNotRequireAuthentication = (state) => {
+class MenuController {
+    constructor($http, $state, authenticationService, $rootScope) {
+        this.$http = $http;
+        this.$state = $state;
+        this.authenticationService = authenticationService;
+        this.$rootScope = $rootScope;
+        this.refreshMenu();
+        $rootScope.$on("RefreshMenu", () => this.refreshMenu());
+        $rootScope.$on("UpdateActiveMenuItem", (event, state) => this.updateActiveMenuItem(event, state));
+    }
+
+    thatDoNotRequireAuthentication(state) {
         let requiresAuthenticationIsDefined = typeof state.requiresAuthentication != "undefined";
         return requiresAuthenticationIsDefined && !state.requiresAuthentication;
     };
-    let removeLoginMenuItem = (state) => state.name != "login";
-    let getAllMenuItems = (state) => typeof state.menuItem != "undefined" && state.menuItem;
-    let sortMenuItems = (menuItemA, menuItemB) => {
+
+    removeLoginMenuItem(state) {
+        return state.name != "login";
+    }
+
+    getAllMenuItems(state) {
+        return typeof state.menuItem != "undefined" && state.menuItem;
+    }
+
+    sortMenuItems(menuItemA, menuItemB) {
         if (typeof menuItemA.order == "undefined") {
             menuItemA.order = 1;
         }
@@ -20,20 +37,25 @@ let menuController = function ($scope, $http, $state, authenticationService, $ro
         }
         return 0;
     };
-    let buildMenu = (isLoggedIn) => {
-        $scope.menuItems = $state.get().filter(getAllMenuItems);
+
+    buildMenu(isLoggedIn) {
+        this.menuItems = this.$state.get().filter(this.getAllMenuItems);
         if (isLoggedIn == true) {
-            $scope.menuItems = $scope.menuItems.filter(removeLoginMenuItem);
+            this.menuItems = this.menuItems.filter(this.removeLoginMenuItem);
         } else {
-            $scope.menuItems = $scope.menuItems.filter(thatDoNotRequireAuthentication);
+            this.menuItems = this.menuItems.filter(this.thatDoNotRequireAuthentication);
         }
-        $scope.menuItems.sort(sortMenuItems);
+        this.menuItems.sort(this.sortMenuItems);
     };
-    $scope.refreshMenu = () => authenticationService.isLoggedIn().then((response) => buildMenu(response.data), () => buildMenu(false));
-    $scope.updateActiveMenuItem = (event, state) => {$scope.currentNavItem = state.name;
+
+    refreshMenu() {
+        this.authenticationService.isLoggedIn().then((response) => this.buildMenu(response.data), () => this.buildMenu(false));
+
     };
-    $scope.refreshMenu();
-    $rootScope.$on("RefreshMenu", $scope.refreshMenu);
-    $rootScope.$on("UpdateActiveMenuItem", $scope.updateActiveMenuItem);
-};
-angular.module("simon").controller("menuController", menuController);
+
+    updateActiveMenuItem(event, state) {
+        this.currentNavItem = state.name;
+    }
+}
+
+angular.module("simon").controller("menuController", MenuController);
