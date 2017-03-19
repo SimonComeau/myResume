@@ -6,8 +6,8 @@ using myResumeAPI.Services;
 using Microsoft.Practices.Unity;
 
 namespace myResumeAPI.Controllers {
-	public class ContactController : ApiController {
-		public ContactController() {
+	public class MessageController : ApiController {
+		public MessageController() {
 			MailClient = UnityService.Instance.Container.Resolve<IResumeMailClient>();
 			DbContext = UnityService.Instance.Container.Resolve<IResumeDbContext>();
 		}
