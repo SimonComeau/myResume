@@ -50,6 +50,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <IncludeIisSettings>true</IncludeIisSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -231,7 +233,7 @@
     <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Models\UserLoginInfoViewModel.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Models\LoginCredentials.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Database\SimonDbContext.cs" />
@@ -254,15 +256,9 @@
     <Content Include=".gitignore" />
     <Content Include="app\app.js" />
     <Content Include="app\authentication\authentication.controller.js" />
-    <Content Include="app\authentication\authentication.css" />
     <Content Include="app\authentication\authentication.service.js" />
-    <Content Include="app\authentication\login.html" />
-    <Content Include="app\config\state.config.js" />
-    <Content Include="app\contact\message.controller.js" />
-    <Content Include="app\contact\contact.html" />
-    <Content Include="app\contact\customContact.css" />
-    <Content Include="app\contact\messageDetails.html" />
-    <Content Include="app\contact\messageList.html" />
+    <Content Include="app\authentication\login.view.css" />
+    <Content Include="app\authentication\login.view.html" />
     <Content Include="app\content\programPics\dunDefSetCalcToolCode-720.png" />
     <Content Include="app\content\programPics\dunDefSetCalcToolCode.png" />
     <Content Include="app\content\programPics\dunDefSetCalcToolUi.png" />
@@ -270,12 +266,19 @@
     <Content Include="app\content\websitePics\religionCares.png" />
     <Content Include="app\content\websitePics\religionCaresCode.png" />
     <Content Include="app\home\home.controller.js" />
-    <Content Include="app\home\home.html" />
+    <Content Include="app\home\home.view.html" />
     <Content Include="app\home\menu.controller.js" />
     <Content Include="app\logos\g-plus-logo.png" />
     <Content Include="app\logos\linkedin-logo-3.png" />
+    <Content Include="app\message\contactMe.view.css" />
+    <Content Include="app\message\contactMe.view.html" />
+    <Content Include="app\message\message.controller.js" />
+    <Content Include="app\message\message.details.view.html" />
+    <Content Include="app\message\message.list.view.html" />
     <Content Include="app\portfolio\portfolio.controller.js" />
     <Content Include="app\portfolio\portfolio.html" />
+    <Content Include="app\state\state.config.js" />
+    <Content Include="app\state\state.events.run.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
@@ -284,15 +287,16 @@
     <Content Include="README.md" />
     <None Include="Properties\PublishProfiles\1and1.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
-    <Content Include="siteFiles\all.css">
+    <None Include="siteFiles\all.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="siteFiles\all.js">
+    </None>
+    <None Include="siteFiles\all.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
