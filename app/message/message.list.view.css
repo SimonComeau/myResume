@@ -1,0 +1,59 @@
+#messageList caption {
+    height: 64px;
+    font-size: 30px;
+}
+
+#messageList thead {
+    font-size: 21px;
+    opacity: 0.54;
+}
+
+#messageList tbody {
+    font-size: 23px;
+    opacity: 0.87;
+}
+
+#messageList tr {
+    height: 48px;
+}
+
+#messageList tbody tr:hover {
+    background-color: #eeeeee;
+}
+
+#messageList, #messageList caption, #messageList thead, #messageList tbody, #messageList tr, #messageList td {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    color: black;
+    vertical-align: middle;
+}
+
+#messageList md-checkbox, #messageList md-checkbox .md-container {
+    margin: auto;
+}
+
+#messageList md-checkbox .md-container {
+    right: 0;
+}
+
+#messageListContainer {
+    padding-left: 24px;
+    padding-right: 14px;
+}
+
+#messageList td, #messageList th {
+    padding-right: 56px;
+}
+
+#messageList tr th:nth-child(1), #messageList tr td:nth-child(1) {
+    padding-left: 24px;
+    text-align: center;
+}
+
+#messageList tr th:nth-child(1), #messageList tr td:nth-child(1), #messageList tr th:nth-child(2),
+#messageList tr td:nth-child(2), #messageList tr th:last-child, #messageList tr td:last-child {
+    padding-right: 24px;
+}
+
+#messageList md-checkbox .md-label {
+    margin-left: 0;
+}
