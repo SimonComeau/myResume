@@ -2,11 +2,10 @@
 using System.Data.Entity;
 using myResumeAPI.Interfaces;
 using myResumeAPI.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Configuration = myResumeAPI.Migrations.Configuration;
 
 namespace myResumeAPI.Database {
-	public class SimonDbContext : IdentityDbContext<ApplicationUser>, IResumeDbContext {
+	public class SimonDbContext : DbContext, IResumeDbContext {
 		// ReSharper disable once MemberCanBePrivate.Global
 		// This can NEVER be made private
 		public DbSet<Contact> Contacts { get; set; }
