@@ -1,5 +1,7 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Linq;
 using myResumeAPI.Interfaces;
 using myResumeAPI.Models;
 using Configuration = myResumeAPI.Migrations.Configuration;
@@ -20,7 +22,9 @@ namespace myResumeAPI.Database {
 			return new SimonDbContext();
 		}
 
-		public void Add(Contact contact) {
+		public List<T> List<T>() where T : Contact => Contacts.OfType<T>().ToList();
+
+		public void Add<T>(T contact) where T: Contact{
 			Contacts.Add(contact);
 			SaveChanges();
 		}

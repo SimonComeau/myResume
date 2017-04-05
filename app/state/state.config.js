@@ -10,7 +10,7 @@ class StateConfig {
         this.buildState("/", "/app/home/home.view.html", "homeController").register("home");
         this.buildState("/portfolio", "/app/portfolio/portfolio.html", "portfolioController", 20, false).register("portfolio");
         this.buildState("/contact", "/app/message/contactMe.view.html", "messageController", 30).register("contact");
-        this.buildState("/message/list", "/app/message/message.list.view.html", "messageController", 40, undefined, true).register("messages");
+        this.buildState("/message/list", "/app/message/message.list.view.html", "messageListController", 40, undefined, true).register("messages");
         this.buildState(undefined, "/app/message/message.details.view.html", "messageController", 50, false, true).register("messageDetails");
         let loginState = this.buildState("/login", "/app/authentication/login.view.html", "authenticationController", 260);
         loginState.params = {redirectState: "home"};

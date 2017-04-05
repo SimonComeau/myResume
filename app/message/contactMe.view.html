@@ -33,11 +33,11 @@
         </md-input-container>
         <md-input-container class="md-block customInputContainer">
             <label for="contactPhoneNumber">Phone number:</label><br>
-            <input id="contactPhoneNumber" ng-model="message.contact.phoneNumber" type="text"/>
+            <input id="contactPhoneNumber" ng-model="message.contact.phone" type="text"/>
         </md-input-container>
         <md-input-container class="md-block customInputContainerTextArea">
             <label for="contactMessage">Message:</label><br>
-            <textarea id="contactMessage" class="md-input" ng-model="message.contact.message"></textarea>
+            <textarea id="contactMessage" class="md-input" ng-model="message.contact.messageSummary"></textarea>
         </md-input-container>
         <div class="button-group">
             <md-button type="submit" class="md-primary md-raised" ng-disabled="message.form.$invalid"

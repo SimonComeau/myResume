@@ -30,6 +30,7 @@ var src = {
         "app/home/menu.controller.js",
         "app/home/home.controller.js",
         "app/message/message.controller.js",
+        "app/message/message.list.controller.js",
         "app/authentication/authentication.controller.js",
         "app/portfolio/portfolio.controller.js"]
 };
@@ -56,3 +57,5 @@ gulp.task("watchJs", function () {
     return watch(src.js, buildJs);
 });
 gulp.task("watch", ["watchCss", "watchJs"]);
+
+module.exports = gulp;

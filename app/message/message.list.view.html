@@ -1,5 +1,5 @@
-<div id="messageListContainer">
-    <table class="table table-striped" id="messageList">
+<div id="messageListContainer" ng-controller = "messageListController as ctrl">
+    <table class="table table-striped" id="messageTable" ng-model="ctrl.messageList">
         <caption>Message list</caption>
         <thead>
         <tr>
@@ -24,46 +24,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <md-checkbox></md-checkbox>
-            </td>
-            <td>
-                Simon
-            </td>
-            <td>
-                sim_com1@hotmail.com
-            </td>
-            <td>
-                4503462565
-            </td>
-            <td>
-                Brian is drunk again, I think he's losing it.
-            </td>
-            <td>
-                Sunday 10:20 pm, too late for Brian to be drunk.
-            </td>
-        </tr>
-        <tr>
+        <tr ng-repeat="message in ctrl.messageList">
             <!-- TODO: make row selection and change background to #F5F5F5 -->
             <td>
                 <md-checkbox></md-checkbox>
             </td>
-            <td>
-                Brian
-            </td>
-            <td>
-                codencrazy@gmail.com
-            </td>
-            <td>
-                4503462565
-            </td>
-            <td>
-                Brian is still drunk again, I think he's lost it.
-            </td>
-            <td>
-                Sunday 10:47 pm, Brian should be in bed.
-            </td>
+            <td ng-bind = "message.name" />
+            <td ng-bind = "message.email" />
+            <td ng-bind = "message.phone" />
+            <td ng-bind = "message.messageSummary" />
+            <td ng-bind = "message.time" />
         </tr>
         </tbody>
     </table>

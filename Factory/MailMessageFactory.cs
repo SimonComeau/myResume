@@ -11,7 +11,7 @@ namespace myResumeAPI.Factory {
 			{
 				From = fromAddress,
 				Subject = $"Contact {contact.Name} has sent you a new message.",
-				Body = $"{contact.Message}{Environment.NewLine}{contact.PhoneNumber}"
+				Body = $"{contact.Message}{Environment.NewLine}{contact.Phone}"
 			};
 			message.To.Add("nomismoc@gmail.com");
 			message.To.Add("contact@simoncomeau.com");
